@@ -14,20 +14,28 @@ namespace Model
         #region Inserção Banco de Dados
 
         public readonly static string INSERT = "INSERT INTO TB_ROTAS " +
-            " ( OS, CIDADE, BASE, SERVICO, ENDERECO, NUMERO, COMPLEMENTO, BAIRRO, CEP " +
+            " ( OS, CIDADE, BASE, SERVICO, " +
+            "ENDERECO, NUMERO, COMPLEMENTO, BAIRRO, CEP " +
             " ) VALUES (" +
             " @OS, @CIDADE, @BASE, @SERVICO, @ENDERECO, @NUMERO, @COMPLEMENTO, @BAIRRO, @CEP " +
             " ) ";
 
+        public readonly static string GETALL = "SELECT " +
+            " OS, CIDADE, BASE, SERVICO, " +
+            " ENDERECO, NUMERO, COMPLEMENTO, BAIRRO, CEP " +
+            "FROM TB_ROTAS ";
+
         #endregion
 
-        public DateTime? Data { get; set; }
+        #region Propriedades
 
+        public DateTime? Data { get; set; }
+ 
         public string? Status { get; set; }
 
         public string? Auditado { get; set; }
 
-        public string? CopReverteu { get; set }
+        public string? CopReverteu { get; set; }
 
         public string? Log { get; set; }
 
@@ -114,6 +122,8 @@ namespace Model
         public string? OBSTecnico { get; set; }
 
         public string? Equipamento { get; set; }
+
+        #endregion
 
     }
 }

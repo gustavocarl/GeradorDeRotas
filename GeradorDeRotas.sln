@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeradorDeRotas", "GeradorDe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{771A39EB-B168-4207-9CC7-6D70639EAA29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngestaoRotas", "IngestaoRotas\IngestaoRotas.csproj", "{9DF3928E-55D1-4A16-91E9-DA0A662EBD63}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadXLS", "ReadXLS\ReadXLS.csproj", "{2D8FB219-FA51-4235-9E1D-930E29B6BEE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{771A39EB-B168-4207-9CC7-6D70639EAA29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{771A39EB-B168-4207-9CC7-6D70639EAA29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{771A39EB-B168-4207-9CC7-6D70639EAA29}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DF3928E-55D1-4A16-91E9-DA0A662EBD63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DF3928E-55D1-4A16-91E9-DA0A662EBD63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DF3928E-55D1-4A16-91E9-DA0A662EBD63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DF3928E-55D1-4A16-91E9-DA0A662EBD63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D8FB219-FA51-4235-9E1D-930E29B6BEE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D8FB219-FA51-4235-9E1D-930E29B6BEE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D8FB219-FA51-4235-9E1D-930E29B6BEE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D8FB219-FA51-4235-9E1D-930E29B6BEE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
