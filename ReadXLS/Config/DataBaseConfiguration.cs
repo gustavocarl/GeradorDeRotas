@@ -14,11 +14,9 @@ namespace ReadXLS.Config
 
         public static string Get()
         {
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile(
-                "appsettings.json",
-                optional: true,
-                reloadOnChange: true
-                );
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
             Configuration = builder.Build();
             string con = Configuration["ConnectionStrings:DefaultConnection"];

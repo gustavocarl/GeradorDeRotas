@@ -47,10 +47,9 @@ namespace Model
 
         public string? WO { get; set; }
 
-        [Key]
-        [StringLength(20)]
-        [Required]
-        public string OS { get; set; }
+        //[Key]
+        //[StringLength(20)]
+        public string? OS { get; set; }
 
         public string? Assinante { get; set; }
 
@@ -68,46 +67,39 @@ namespace Model
 
         public string? PontoCasaApt { get; set; }
 
-        [StringLength(150)]
-        [Required]
-        public string Cidade { get; set; }
+        //[StringLength(150)]
+        public string? Cidade { get; set; }
 
-        [StringLength(150)]
-        [Required]
-        public string Base { get; set; }
+        //[StringLength(150)]
+        public string? Base { get; set; }
 
         public DateTime? Horario { get; set; }
 
-        public string Segmento { get; set; }
+        public string? Segmento { get; set; }
 
-        [StringLength(150)]
-        [Required]
-        public string Servico { get; set; }
+        //[StringLength(150)]
+        public string? Servico { get; set; }
 
-        public string TipoServico { get; set; }
+        public string? TipoServico { get; set; }
 
-        public string TipoOS { get; set; }
+        public string? TipoOS { get; set; }
 
-        [StringLength(150)]
-        [Required]
-        public string Endereco { get; set; }
+        //[StringLength(150)]
+        public string? Endereco { get; set; }
         
-        [Required]
-        public int Numero { get; set; }
+        //[StringLength(10)]
+        public string? Numero { get; set; }
 
-        [StringLength(150)]
-        [Required]
-        public string Complemento { get; set; }
+        //[StringLength(150)]
+        public string? Complemento { get; set; }
 
-        [StringLength(9)]
-        [Required]
-        public string CEP { get; set; }
+        //[StringLength(9)]
+        public string? CEP { get; set; }
 
         public string? Node { get; set; }
 
-        [StringLength(150)]
-        [Required]
-        public string Bairro { get; set; }
+        //[StringLength(150)]
+        public string? Bairro { get; set; }
     
         public string? Pacote { get; set; }
 
