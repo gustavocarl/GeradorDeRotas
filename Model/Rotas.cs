@@ -47,8 +47,9 @@ namespace Model
 
         public string? WO { get; set; }
 
-        //[Key]
-        //[StringLength(20)]
+        [Key]
+        [StringLength(20)]
+        [Required]
         public string? OS { get; set; }
 
         public string? Assinante { get; set; }
@@ -67,38 +68,45 @@ namespace Model
 
         public string? PontoCasaApt { get; set; }
 
-        //[StringLength(150)]
+        [StringLength(150)]
+        [Required]
         public string? Cidade { get; set; }
 
-        //[StringLength(150)]
+        [StringLength(150)]
+        [Required]
         public string? Base { get; set; }
 
         public DateTime? Horario { get; set; }
 
         public string? Segmento { get; set; }
 
-        //[StringLength(150)]
+        [StringLength(150)]
+        [Required]
         public string? Servico { get; set; }
 
         public string? TipoServico { get; set; }
 
         public string? TipoOS { get; set; }
 
-        //[StringLength(150)]
+        [StringLength(150)]
+        [Required]
         public string? Endereco { get; set; }
         
-        //[StringLength(10)]
+        [StringLength(10)]
+        [Required]
         public string? Numero { get; set; }
 
-        //[StringLength(150)]
+        [StringLength(150)]
         public string? Complemento { get; set; }
 
-        //[StringLength(9)]
+        [StringLength(9)]
+        [Required]
         public string? CEP { get; set; }
 
         public string? Node { get; set; }
 
-        //[StringLength(150)]
+        [StringLength(150)]
+        [Required]
         public string? Bairro { get; set; }
     
         public string? Pacote { get; set; }
