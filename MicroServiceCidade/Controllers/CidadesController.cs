@@ -20,7 +20,7 @@ namespace MicroServiceCidade.Controllers
         [HttpGet]
         public ActionResult<List<Cidade>> GetAll() => _cidadeServices.Get();
 
-        [HttpGet("{Cidade}", Name = "GetCidade")]
+        [HttpGet("{cidade}", Name = "GetCidade")]
         public ActionResult<Cidade> GetCidadeNome(string cidade)
         {
             var buscarCidade = _cidadeServices.Get(cidade);
@@ -58,7 +58,7 @@ namespace MicroServiceCidade.Controllers
 
         }
 
-        [HttpDelete("{Cidade}")]
+        [HttpDelete("{cidade}")]
         public IActionResult Delete(string cidade)
         {
             var buscarCidade = _cidadeServices.Get(cidade);
