@@ -33,7 +33,7 @@ namespace MicroServicesRota
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicroServicesRota", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicroServicesPessoa", Version = "v1" });
             });
 
             services.Configure<MicroServicePessoaSettings>(Configuration.GetSection(nameof(MicroServicePessoaSettings)));
@@ -50,7 +50,7 @@ namespace MicroServicesRota
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MicroServicesRota v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MicroServicesPessoa v1"));
             }
 
             app.UseHttpsRedirection();

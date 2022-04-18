@@ -10,6 +10,7 @@ namespace Services
 {
     public class BuscarAPI
     {
+
         static readonly HttpClient client = new HttpClient();
 
         #region Get
@@ -94,7 +95,8 @@ namespace Services
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var pessoaJson = JsonConvert.DeserializeObject<Pessoa>(responseBody);
                 return pessoaJson;
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 throw;
             }
@@ -146,18 +148,18 @@ namespace Services
 
         public static void PostCidade(Cidade novaCidade)
         {
-            client.PostAsJsonAsync("https://localhost:44366/api/Cidades", novaCidade);
+            client.PostAsJsonAsync("https://localhost:44366/api/Cidades/", novaCidade);
         }
 
 
         public static void PostEquipe(Equipe novaEquipe)
         {
-            client.PostAsJsonAsync("https://localhost:44381/api/Equipes", novaEquipe);
+            client.PostAsJsonAsync("https://localhost:44381/api/Equipes/", novaEquipe);
         }
 
         public static void PostPessoa(Pessoa novaPessoa)
         {
-            client.PostAsJsonAsync("https://localhost:44381/api/Equipes", novaPessoa);
+            client.PostAsJsonAsync("https://localhost:44370/api/Pessoas/", novaPessoa);
         }
 
 
@@ -172,7 +174,7 @@ namespace Services
 
         public static void UpdateCidade(string nome, Cidade cidadeIn)
         {
-            client.PutAsJsonAsync("https://localhost:44381/api/Equipes/" + nome, cidadeIn);
+            client.PutAsJsonAsync("https://localhost:44366/api/Cidades/" + nome, cidadeIn);
         }
 
         public static void UpdatePessoa(string nome, Pessoa pessoaIn)
@@ -184,8 +186,22 @@ namespace Services
 
         #region Delete
 
-        
-        
+        public static void DeletePessoa(string id)
+        {
+            client.DeleteAsync("https://localhost:44370/api/Pessoas/" + id);
+        }
+
+        public static void DeleteCidade(string id)
+        {
+            client.DeleteAsync("https://localhost:44366/api/Cidades/" + id);
+        }
+
+        public static void DeleteEquipe(string id)
+        {
+            client.DeleteAsync("https://localhost:44381/api/Equipes/" + id);
+        }
+
+
         #endregion
 
     }
