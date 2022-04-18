@@ -32,7 +32,5 @@ namespace MicroServicesRota.Service
 
         public void Delete(Pessoa pessoaIn) => _pessoa.DeleteOne(pessoa => pessoa.Id == pessoaIn.Id);
 
-        public void Delete(string id) => _pessoa.DeleteOne(pessoa => pessoa.Id == id);
-
     }
 }

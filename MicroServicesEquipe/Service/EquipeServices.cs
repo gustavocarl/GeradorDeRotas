@@ -13,21 +13,23 @@ namespace MicroServicesEquipe.Service
 
         public EquipeServices(IMicroServiceEquipeSettings settings)
         {
-        
+
             var equipe = new MongoClient(settings.ConnectionString);
             var database = equipe.GetDatabase(settings.DatabaseName);
             _equipe = database.GetCollection<Equipe>(settings.EquipeCollectionName);
-        
+
         }
 
         public List<Equipe> Get() => _equipe.Find(equipe => true).ToList();
 
-        public Equipe Get(string nome) => _equipe.Find(equipe => equipe.Nome == nome).SingleOrDefault();
+        public Equipe Get(string id) => _equipe.Find(equipe => equipe.Id == id).SingleOrDefault();
 
-        public async Task<Equipe> Create (Equipe equipe)
+        public Equipe GetNome(string nome) => _equipe.Find(equipe => equipe.Nome == nome).SingleOrDefault();
+
+        public async Task<Equipe> Create(Equipe equipe)
         {
-            
-            var buscarCidadeAPI = await BuscarAPI.BuscarCidadeAPI(equipe.Cidade.Nome);
+
+            var buscarCidadeAPI = await BuscarAPI.BuscarCidadeNomeAPI(equipe.Cidade.Nome);
 
             equipe.Cidade = buscarCidadeAPI;
             _equipe.InsertOne(equipe);
@@ -35,8 +37,8 @@ namespace MicroServicesEquipe.Service
 
         }
 
-        public void Update(string nome, Equipe equipeIn) => _equipe.ReplaceOne(equipe => equipe.Nome == nome, equipeIn);
+        public void Update(string id, Equipe equipeIn) => _equipe.ReplaceOne(equipe => equipe.Id == id, equipeIn);
 
-        public void Delete(string nome) => _equipe.DeleteOne(equipe => equipe.Nome == nome);
+        public void Delete(Equipe equipeIn) => _equipe.DeleteOne(equipe => equipe.Id == equipeIn.Id);
     }
 }

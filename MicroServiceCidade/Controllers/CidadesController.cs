@@ -20,10 +20,22 @@ namespace MicroServiceCidade.Controllers
         [HttpGet]
         public ActionResult<List<Cidade>> GetAll() => _cidadeServices.Get();
 
-        [HttpGet("{cidade}", Name = "GetCidade")]
-        public ActionResult<Cidade> GetCidadeNome(string cidade)
+
+        [HttpGet("{id:length(24)}", Name = "GetCidade")]
+        public ActionResult<Cidade> GetCidade(string id)
         {
-            var buscarCidade = _cidadeServices.Get(cidade);
+            var buscarCidade = _cidadeServices.Get(id);
+
+            if (buscarCidade == null)
+                return BadRequest("Cidade não encontrada");
+
+            return buscarCidade;
+        }
+
+        [HttpGet("{nome}", Name = "GetCidadeNome")]
+        public ActionResult<Cidade> GetCidadeNome(string nome)
+        {
+            var buscarCidade = _cidadeServices.GetNome(nome);
 
             if (buscarCidade == null)
                 return BadRequest("Cidade não encontrada");
@@ -34,39 +46,38 @@ namespace MicroServiceCidade.Controllers
         [HttpPost]
         public ActionResult<Cidade> Create(Cidade novaCidade)
         {
-            var buscarCidade = _cidadeServices.Get(novaCidade.Nome);
+            var buscarCidade = _cidadeServices.Get(novaCidade.Id);
 
             if (buscarCidade != null)
                 return BadRequest("Cidade já cadastrada");
 
             _cidadeServices.Create(novaCidade);
 
-            return CreatedAtRoute("GetCidade", new { cidade = novaCidade.Nome }, novaCidade);
+            return CreatedAtRoute("GetCidade", new { id = novaCidade.Id }, novaCidade);
         }
 
-        [HttpPut("{cidade}")]
-        public IActionResult Update(string cidade, Cidade cidadeIn)
+        [HttpPut("{id:length(24)}")]
+        public IActionResult Update(string id, Cidade cidadeIn)
         {
-            var buscarCidade = _cidadeServices.Get(cidade);
+            var buscarCidade = _cidadeServices.Get(id);
 
             if (buscarCidade == null)
                 return NotFound("Cidade não cadastrada");
 
-            _cidadeServices.Update(cidade, cidadeIn);
-
+            _cidadeServices.Update(id, cidadeIn);
             return NoContent();
 
         }
 
-        [HttpDelete("{cidade}")]
-        public IActionResult Delete(string cidade)
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id)
         {
-            var buscarCidade = _cidadeServices.Get(cidade);
+            var buscarCidade = _cidadeServices.Get(id);
 
             if (buscarCidade == null)
                 return NotFound("Cidade não encontrada");
 
-            _cidadeServices.Delete(cidade);
+            _cidadeServices.Delete(buscarCidade);
             return NoContent();
         }
     }

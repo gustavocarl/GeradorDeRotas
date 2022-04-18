@@ -21,10 +21,10 @@ namespace MicroServicesEquipe.Controllers
         [HttpGet]
         public ActionResult<List<Equipe>> GetAll() => _equipeServices.Get();
 
-        [HttpGet("{equipe}", Name = "GetEquipe")]
-        public ActionResult<Equipe> GetNome(string equipe)
+        [HttpGet("{id:length(24)}", Name = "GetEquipe")]
+        public ActionResult<Equipe> Get(string id)
         {
-            var buscarEquipe = _equipeServices.Get(equipe);
+            var buscarEquipe = _equipeServices.Get(id);
 
             if (buscarEquipe == null)
                 return BadRequest("Equipe não cadastrada");
@@ -32,41 +32,54 @@ namespace MicroServicesEquipe.Controllers
             return buscarEquipe;
         }
 
+        [HttpGet("{equipe}", Name = "GetEquipeNome")]
+        public ActionResult<Equipe> GetNome(string nome)
+        {
+            var buscarEquipe = _equipeServices.GetNome(nome);
+
+            if (buscarEquipe == null)
+                return BadRequest("Equipe não cadastrada");
+
+            return buscarEquipe;
+        }
+
+
         [HttpPost]
         public async Task<ActionResult<Equipe>> Create(Equipe novaEquipe)
         {
-            var buscarEquipe = _equipeServices.Get(novaEquipe.Nome);
+            var buscarEquipe = _equipeServices.Get(novaEquipe.Id);
 
             if (buscarEquipe != null)
                 return BadRequest("Equipe já cadastrada");
 
             await _equipeServices.Create(novaEquipe);
 
-            return CreatedAtRoute("GetEquipe", new { equipe = novaEquipe.Nome }, novaEquipe);
+            return CreatedAtRoute("GetEquipe", new { id = novaEquipe.Id }, novaEquipe);
         }
 
-        [HttpPut("{equipe}")]
-        public IActionResult Update(string equipe, Equipe equipeIn)
+        [HttpPut("{id:length(24)}")]
+        public IActionResult Update(string id, Equipe equipeIn)
         {
-            var buscarTime = _equipeServices.Get(equipe);
+            var buscarTime = _equipeServices.Get(id);
 
             if (buscarTime == null)
                 return BadRequest("Equipe não encontrada");
 
-            _equipeServices.Update(equipe, equipeIn);
+            _equipeServices.Update(id, equipeIn);
 
             return NoContent();
 
         }
 
-        [HttpDelete("{equipe}")]
-        public IActionResult Delete(string equipe)
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id)
         {
-            var buscarEquipe = _equipeServices.Get(equipe);
+            var buscarEquipe = _equipeServices.Get(id);
 
             if (buscarEquipe == null)
                 return BadRequest("Equipe não encontrada");
 
+            _equipeServices.Delete(buscarEquipe);
             return NoContent();
 
         }
