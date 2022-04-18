@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class BuscarAPI
+    public class CrudAPI
     {
 
         static readonly HttpClient client = new HttpClient();

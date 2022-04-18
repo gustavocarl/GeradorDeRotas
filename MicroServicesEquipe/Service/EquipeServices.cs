@@ -29,7 +29,7 @@ namespace MicroServicesEquipe.Service
         public async Task<Equipe> Create(Equipe equipe)
         {
 
-            var buscarCidadeAPI = await BuscarAPI.BuscarCidadeNomeAPI(equipe.Cidade.Nome);
+            var buscarCidadeAPI = await CrudAPI.BuscarCidadeNomeAPI(equipe.Cidade.Nome);
 
             equipe.Cidade = buscarCidadeAPI;
             _equipe.InsertOne(equipe);
