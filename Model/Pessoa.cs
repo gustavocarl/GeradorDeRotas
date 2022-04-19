@@ -10,5 +10,7 @@ namespace Model
         public string Id { get; set; }
 
         public string NomeCompleto { get; set; }
+
+        public bool Disponivel { get; set; } = true;
     }
 }

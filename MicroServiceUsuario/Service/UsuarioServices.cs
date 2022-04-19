@@ -2,6 +2,7 @@
 using Model;
 using MongoDB.Driver;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MicroServiceUsuario.Service
 {
@@ -11,11 +12,9 @@ namespace MicroServiceUsuario.Service
 
         public UsuarioServices(IMicroServiceUsuarioSettings settings)
         {
-
             var usuario = new MongoClient(settings.ConnectionString);
             var database = usuario.GetDatabase(settings.DatabaseName);
             _usuario = database.GetCollection<Usuario>(settings.UsuarioCollectionName);
-
         }
 
         public List<Usuario> Get() => _usuario.Find(usuario => true).ToList();
@@ -28,6 +27,7 @@ namespace MicroServiceUsuario.Service
 
         public Usuario Create(Usuario novoUsuario)
         {
+
             _usuario.InsertOne(novoUsuario);
             return novoUsuario;
         }

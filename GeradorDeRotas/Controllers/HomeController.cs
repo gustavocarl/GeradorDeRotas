@@ -22,7 +22,7 @@ namespace GeradorDeRotas.Controllers
         public IActionResult Index()
         {
             PessoaService pessoaService = new PessoaService();
-            return Ok(pessoaService.Get());
+            return View(pessoaService);
         }
 
         public IActionResult Privacy()

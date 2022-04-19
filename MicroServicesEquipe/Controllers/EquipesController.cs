@@ -47,7 +47,7 @@ namespace MicroServicesEquipe.Controllers
         [HttpPost]
         public async Task<ActionResult<Equipe>> Create(Equipe novaEquipe)
         {
-            var buscarEquipe = _equipeServices.Get(novaEquipe.Id);
+            var buscarEquipe = _equipeServices.GetEquipeNome(novaEquipe.Nome);
 
             if (buscarEquipe != null)
                 return BadRequest("Equipe já cadastrada");

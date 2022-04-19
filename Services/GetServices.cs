@@ -117,8 +117,8 @@ namespace Services
                 HttpResponseMessage response = await client.GetAsync("https://localhost:44381/api/Equipes");
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                var cidadeJson = JsonConvert.DeserializeObject<List<Equipe>>(responseBody);
-                return cidadeJson;
+                var equipeJson = JsonConvert.DeserializeObject<List<Equipe>>(responseBody);
+                return equipeJson;
             }
             catch (Exception)
             {
@@ -144,6 +144,21 @@ namespace Services
             }
         }
 
+        public static async Task<List<Usuario>> BuscarTodosUsuarios(string id)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44315/api/Usuarios");
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var usuarioJson = JsonConvert.DeserializeObject<List<Usuario>>(responseBody);
+                return usuarioJson;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }

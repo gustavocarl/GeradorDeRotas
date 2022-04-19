@@ -1,6 +1,6 @@
 using System;
 
-namespace MVCPessoa.Models
+namespace MVCGeradorDeRotas.Models
 {
     public class ErrorViewModel
     {

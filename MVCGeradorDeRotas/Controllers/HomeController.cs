@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MVCPessoa.Models;
+using MVCGeradorDeRotas.Models;
+using MVCGeradorDeRotas.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVCPessoa.Controllers
+namespace MVCGeradorDeRotas.Controllers
 {
     public class HomeController : Controller
     {
@@ -18,8 +19,9 @@ namespace MVCPessoa.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var a = await UsuarioServices.Get();
             return View();
         }
 
