@@ -20,7 +20,7 @@ namespace MicroServicesRota.Service
 
         public Pessoa Get(string id) => _pessoa.Find<Pessoa>(pessoa => pessoa.Id == id).FirstOrDefault();
 
-        public Pessoa GetNome(string nome) => _pessoa.Find<Pessoa>(pessoa => pessoa.Nome == nome).FirstOrDefault();
+        public Pessoa GetNome(string nome) => _pessoa.Find<Pessoa>(pessoa => pessoa.NomeCompleto == nome).FirstOrDefault();
 
         public Pessoa Create(Pessoa novaPessoa)
         {

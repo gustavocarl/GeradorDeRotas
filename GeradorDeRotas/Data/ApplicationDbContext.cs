@@ -23,6 +23,5 @@ namespace GeradorDeRotas.Data
 
         public DbSet<Rotas> Rotas { get; set; }
 
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GeradorDeRotas.Models;
+using GeradorDeRotas.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,7 +21,8 @@ namespace GeradorDeRotas.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            PessoaService pessoaService = new PessoaService();
+            return Ok(pessoaService.Get());
         }
 
         public IActionResult Privacy()

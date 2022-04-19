@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeradorDeRotas", "GeradorDeRotas\GeradorDeRotas.csproj", "{3558D01D-F883-4FFA-9717-088F2962B362}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeradorDeRotas", "GeradorDeRotas\GeradorDeRotas.csproj", "{3558D01D-F883-4FFA-9717-088F2962B362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{771A39EB-B168-4207-9CC7-6D70639EAA29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{771A39EB-B168-4207-9CC7-6D70639EAA29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadXLS", "ReadXLS\ReadXLS.csproj", "{2D8FB219-FA51-4235-9E1D-930E29B6BEE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadXLS", "ReadXLS\ReadXLS.csproj", "{2D8FB219-FA51-4235-9E1D-930E29B6BEE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroServiceCidade", "MicroServiceCidade\MicroServiceCidade.csproj", "{0CDA92AA-6AD7-4F47-8B86-E0C893E5553E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroServiceCidade", "MicroServiceCidade\MicroServiceCidade.csproj", "{0CDA92AA-6AD7-4F47-8B86-E0C893E5553E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroServicesPessoa", "MicroServicesRota\MicroServicesPessoa.csproj", "{10FFB941-77BA-4AC8-A24E-EFD72BF94D1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroServicesPessoa", "MicroServicesRota\MicroServicesPessoa.csproj", "{10FFB941-77BA-4AC8-A24E-EFD72BF94D1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroServicesEquipe", "MicroServicesEquipe\MicroServicesEquipe.csproj", "{9C2D960A-4BA1-46DD-941F-3F7D37EF8BE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroServicesEquipe", "MicroServicesEquipe\MicroServicesEquipe.csproj", "{9C2D960A-4BA1-46DD-941F-3F7D37EF8BE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{9E6B321E-EA79-481D-87DE-B1F8A1E40A3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{9E6B321E-EA79-481D-87DE-B1F8A1E40A3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroServiceUsuario", "MicroServiceUsuario\MicroServiceUsuario.csproj", "{F35F644C-8AE9-4622-B4B5-D938F9FF0748}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{9E6B321E-EA79-481D-87DE-B1F8A1E40A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E6B321E-EA79-481D-87DE-B1F8A1E40A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E6B321E-EA79-481D-87DE-B1F8A1E40A3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F35F644C-8AE9-4622-B4B5-D938F9FF0748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F35F644C-8AE9-4622-B4B5-D938F9FF0748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F35F644C-8AE9-4622-B4B5-D938F9FF0748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F35F644C-8AE9-4622-B4B5-D938F9FF0748}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

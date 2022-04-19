@@ -10,26 +10,8 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    [Table("TB_ROTAS")]
     public class Rotas
     {
-        #region Inserção Banco de Dados
-
-        public readonly static string INSERT = "INSERT INTO TB_ROTAS " +
-            " ( OS, CIDADE, BASE, SERVICO, " +
-            "ENDERECO, NUMERO, COMPLEMENTO, BAIRRO, CEP " +
-            " ) VALUES (" +
-            " @OS, @CIDADE, @BASE, @SERVICO, @ENDERECO, @NUMERO, @COMPLEMENTO, @BAIRRO, @CEP " +
-            " ) ";
-
-        public readonly static string GETALL = "SELECT " +
-            " OS, CIDADE, BASE, SERVICO, " +
-            " ENDERECO, NUMERO, COMPLEMENTO, BAIRRO, CEP " +
-            "FROM TB_ROTAS ";
-
-        #endregion
-
-        #region Propriedades
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -109,8 +91,6 @@ namespace Model
         public string? OBSTecnico { get; set; }
 
         public string? Equipamento { get; set; }
-
-        #endregion
 
     }
 }

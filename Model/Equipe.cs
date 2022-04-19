@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    [Table("TB_EQUIPE")]
     public class Equipe
     {
         [BsonId]
@@ -18,6 +17,8 @@ namespace Model
         public string Id { get; set; }
 
         public string Nome { get; set; }
+
+        public List<Pessoa> Pessoa { get; set; }
 
         public Cidade Cidade { get; set; }
     }

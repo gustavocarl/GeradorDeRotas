@@ -10,13 +10,16 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    [Table("TB_CIDADE")]
     public class Cidade
     {
+
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         
         public string Nome { get; set; }
+
+        public string UF { get; set; }
+
     }
 }

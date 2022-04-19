@@ -19,11 +19,11 @@ namespace ReadXLS.Read
 
             RotasService rotaService = new RotasService();
 
-            string path = @"C:\Xls\GeradorDeRotas.xlsx";
+            FileInfo existingFile = new FileInfo(@"C:\Xls\GeradorDeRotas.xlsx");
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            using (ExcelPackage package = new ExcelPackage(path))
+            using (ExcelPackage package = new ExcelPackage(existingFile))
             {
                 ExcelWorksheet planilha = package.Workbook.Worksheets[0];
 
@@ -54,7 +54,8 @@ namespace ReadXLS.Read
                 var dataAtual = DateTime.Now.ToString("dd-MM-yyyy");
                 var file = new StreamWriter(@"C:\Doc\Ordem de Servico " + dataAtual + ".doc");
 
-                file.WriteLine("Nome, email\n\n");
+                file.WriteLine($"Rota de Trabalho - {DateTime.Now.ToString("dd/mm/yyyy")}");
+                file.WriteLine("Retornos");
 
                 foreach (var item in response)
                 {

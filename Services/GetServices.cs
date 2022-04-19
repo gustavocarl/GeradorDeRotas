@@ -2,20 +2,16 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Json;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Services
 {
-    public class CrudAPI
+    public class GetServices
     {
-
         static readonly HttpClient client = new HttpClient();
-
-        #region Get
-
-        #region Buscas Cidade
 
         public static async Task<List<Cidade>> BuscarTodasCidades()
         {
@@ -30,6 +26,22 @@ namespace Services
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public static async Task<Cidade> BuscarCidadeAPI(string id)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44366/api/Cidades/" + id);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var pessoaJson = JsonConvert.DeserializeObject<Cidade>(responseBody);
+                return pessoaJson;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -49,10 +61,6 @@ namespace Services
                 throw;
             }
         }
-
-        #endregion
-
-        #region Buscas da Pessoa
 
         public static async Task<List<Pessoa>> BuscarTodasPessoas()
         {
@@ -102,10 +110,6 @@ namespace Services
             }
         }
 
-        #endregion
-
-        #region Buscas Equipe
-
         public static async Task<List<Equipe>> BuscarTodasEquipes()
         {
             try
@@ -140,69 +144,6 @@ namespace Services
             }
         }
 
-        #endregion
-
-        #endregion
-
-        #region Post
-
-        public static void PostCidade(Cidade novaCidade)
-        {
-            client.PostAsJsonAsync("https://localhost:44366/api/Cidades/", novaCidade);
-        }
-
-
-        public static void PostEquipe(Equipe novaEquipe)
-        {
-            client.PostAsJsonAsync("https://localhost:44381/api/Equipes/", novaEquipe);
-        }
-
-        public static void PostPessoa(Pessoa novaPessoa)
-        {
-            client.PostAsJsonAsync("https://localhost:44370/api/Pessoas/", novaPessoa);
-        }
-
-
-        #endregion
-
-        #region Put
-
-        public static void UpdateEquipe(string nome, Equipe equipeIn)
-        {
-            client.PutAsJsonAsync("https://localhost:44381/api/Equipes/" + nome, equipeIn);
-        }
-
-        public static void UpdateCidade(string nome, Cidade cidadeIn)
-        {
-            client.PutAsJsonAsync("https://localhost:44366/api/Cidades/" + nome, cidadeIn);
-        }
-
-        public static void UpdatePessoa(string nome, Pessoa pessoaIn)
-        {
-            client.PutAsJsonAsync("https://localhost:44370/api/Pessoas/" + nome, pessoaIn);
-        }
-
-        #endregion
-
-        #region Delete
-
-        public static void DeletePessoa(string id)
-        {
-            client.DeleteAsync("https://localhost:44370/api/Pessoas/" + id);
-        }
-
-        public static void DeleteCidade(string id)
-        {
-            client.DeleteAsync("https://localhost:44366/api/Cidades/" + id);
-        }
-
-        public static void DeleteEquipe(string id)
-        {
-            client.DeleteAsync("https://localhost:44381/api/Equipes/" + id);
-        }
-
-
-        #endregion
 
     }
 }

@@ -32,7 +32,7 @@ namespace MicroServicesEquipe.Controllers
             return buscarEquipe;
         }
 
-        [HttpGet("{equipe}", Name = "GetEquipeNome")]
+        [HttpGet("{nome}", Name = "GetEquipeNome")]
         public ActionResult<Equipe> GetNome(string nome)
         {
             var buscarEquipe = _equipeServices.GetNome(nome);
@@ -83,5 +83,6 @@ namespace MicroServicesEquipe.Controllers
             return NoContent();
 
         }
+
     }
 }
