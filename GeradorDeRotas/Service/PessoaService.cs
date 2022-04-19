@@ -17,14 +17,14 @@ namespace GeradorDeRotas.Service
 
         }
 
-        public async Task<List<Pessoa>> Get()
+        public List<Pessoa> Get()
         {
 
             try
             {
-                HttpResponseMessage response = await client.GetAsync("https://localhost:44370/api/Pessoas");
+                HttpResponseMessage response = client.GetAsync("https://localhost:44370/api/Pessoas").Result;
                 response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
+                string responseBody = response.Content.ReadAsStringAsync().Result;
                 var pessoasJson = JsonConvert.DeserializeObject<List<Pessoa>>(responseBody);
                 return pessoasJson;
             }

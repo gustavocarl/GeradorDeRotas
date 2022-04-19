@@ -24,16 +24,38 @@ namespace MicroServicesEquipe.Service
 
         public Equipe Get(string id) => _equipe.Find(equipe => equipe.Id == id).SingleOrDefault();
 
-        public Equipe GetNome(string nome) => _equipe.Find(equipe => equipe.Nome == nome).SingleOrDefault();
+        public Equipe GetEquipeNome(string nome) => _equipe.Find(equipe => equipe.Nome == nome).SingleOrDefault();
 
-        public async Task<Equipe> Create(Equipe equipe)
+        public async Task<Equipe> Create(Equipe novaEquipe)
         {
+            var listaPessoas = new List<Pessoa>();
 
-            var buscarCidadeAPI = await PostServices.BuscarCidadeNomeAPI(equipe.Cidade.Nome);
+            foreach (var item in novaEquipe.Pessoa)
+            {
 
-            equipe.Cidade = buscarCidadeAPI;
-            _equipe.InsertOne(equipe);
-            return equipe;
+                try
+                {
+                    Pessoa verificarPessoa = await GetServices.BuscarPessoaNomeAPI(item.NomeCompleto);
+                    UpdateServices.UpdatePessoa(item.NomeCompleto, new Pessoa()
+                    {
+                        Id = verificarPessoa.Id,
+                        NomeCompleto = verificarPessoa.NomeCompleto,
+                    });
+                    listaPessoas.Add(verificarPessoa);
+                }
+                catch (System.Exception)
+                {
+                    throw;
+                }
+            }
+
+            var buscarCidade = await GetServices.BuscarCidadeNomeAPI(novaEquipe.Cidade.Nome);
+
+            novaEquipe.Pessoa = listaPessoas;
+            novaEquipe.Cidade = buscarCidade;
+
+            _equipe.InsertOne(novaEquipe);
+            return novaEquipe;
 
         }
 

@@ -24,6 +24,8 @@ namespace MicroServiceUsuario.Service
 
         public Usuario GetNome(string nome) => _usuario.Find<Usuario>(usuario => usuario.NomeCompleto == nome).FirstOrDefault();
 
+        public Usuario GetLogin(string login) => _usuario.Find<Usuario>(usuario => usuario.Login == login).FirstOrDefault();
+
         public Usuario Create(Usuario novoUsuario)
         {
             _usuario.InsertOne(novoUsuario);

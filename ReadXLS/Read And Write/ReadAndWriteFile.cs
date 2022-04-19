@@ -1,12 +1,8 @@
 ﻿using Model;
 using OfficeOpenXml;
-using ReadXLS.Repository;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ReadXLS.Read
 {
@@ -16,8 +12,6 @@ namespace ReadXLS.Read
         {
             var response = new List<Rotas>();
             bool pularPrimeiraLinha = false;
-
-            RotasService rotaService = new RotasService();
 
             FileInfo existingFile = new FileInfo(@"C:\Xls\GeradorDeRotas.xlsx");
 
@@ -69,7 +63,9 @@ namespace ReadXLS.Read
                 }
 
                 file.Close();
+
             }
+
             return response;
         }
     }

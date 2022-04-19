@@ -40,11 +40,20 @@ namespace MicroServiceUsuario.Controllers
             return buscarUsuario;
         }
 
+        [HttpGet("login/{login}", Name = "GetUsuarioLogin")]
+        public ActionResult<Usuario> GetLogin(string login)
+        {
+            var buscarUsuario = _usuarioServices.GetLogin(login);
+            if (buscarUsuario == null)
+                return BadRequest("Usuário não encontrado");
+            return buscarUsuario;
+        }
+
         [HttpPost]
         public ActionResult<Usuario> Create(Usuario novoUsuario)
         {
 
-            var buscarUsuario = _usuarioServices.Get(novoUsuario.Id);
+            var buscarUsuario = _usuarioServices.GetLogin(novoUsuario.Login);
 
             if (buscarUsuario != null)
                 return BadRequest("Usuário já cadastrado");

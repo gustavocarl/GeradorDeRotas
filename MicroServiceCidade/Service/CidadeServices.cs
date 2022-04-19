@@ -21,7 +21,7 @@ namespace MicroServiceCidade.Service
 
         public Cidade Get(string id) => _cidade.Find<Cidade>(cidade => cidade.Id == id).FirstOrDefault();
 
-        public Cidade GetNome(string nome) => _cidade.Find<Cidade>(cidade => cidade.Nome == nome).FirstOrDefault();
+        public Cidade GetCidadeNome(string nome) => _cidade.Find<Cidade>(cidade => cidade.Nome == nome).FirstOrDefault();
 
         public Cidade Create(Cidade novaCidade)
         {

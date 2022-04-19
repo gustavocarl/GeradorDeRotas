@@ -35,7 +35,7 @@ namespace MicroServicesEquipe.Controllers
         [HttpGet("{nome}", Name = "GetEquipeNome")]
         public ActionResult<Equipe> GetNome(string nome)
         {
-            var buscarEquipe = _equipeServices.GetNome(nome);
+            var buscarEquipe = _equipeServices.GetEquipeNome(nome);
 
             if (buscarEquipe == null)
                 return BadRequest("Equipe não cadastrada");

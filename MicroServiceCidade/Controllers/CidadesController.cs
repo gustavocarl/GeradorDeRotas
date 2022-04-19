@@ -35,7 +35,7 @@ namespace MicroServiceCidade.Controllers
         [HttpGet("{nome}", Name = "GetCidadeNome")]
         public ActionResult<Cidade> GetCidadeNome(string nome)
         {
-            var buscarCidade = _cidadeServices.GetNome(nome);
+            var buscarCidade = _cidadeServices.GetCidadeNome(nome);
 
             if (buscarCidade == null)
                 return BadRequest("Cidade não encontrada");
@@ -46,7 +46,7 @@ namespace MicroServiceCidade.Controllers
         [HttpPost]
         public ActionResult<Cidade> Create(Cidade novaCidade)
         {
-            var buscarCidade = _cidadeServices.Get(novaCidade.Id);
+            var buscarCidade = _cidadeServices.GetCidadeNome(novaCidade.Nome);
 
             if (buscarCidade != null)
                 return BadRequest("Cidade já cadastrada");
