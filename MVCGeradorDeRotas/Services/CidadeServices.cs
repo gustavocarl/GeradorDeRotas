@@ -100,7 +100,7 @@ namespace MVCGeradorDeRotas.Services
                 client.BaseAddress = new Uri(_baseUri);
                 var cidadeJson = JsonConvert.SerializeObject(novaCidade);
                 var content = new StringContent(cidadeJson, Encoding.UTF8, "application/json");
-                var result = await client.PostAsync("MicroServiceCidade", content);
+                var result = await client.PostAsync("Cidades/", content);
                 if (result.IsSuccessStatusCode)
                     return novaCidade;
                 else
@@ -109,44 +109,41 @@ namespace MVCGeradorDeRotas.Services
             }
         }
 
-   //     public static async Task<Cidade> PutCidade(Cidade editarCidade)
-   //     {
-   //         using (var client = new HttpClient())
-   //         {
-   //             client.BaseAddress = new Uri(_baseUri);
-   //             var cidadeJson = JsonConvert.SerializeObject(editarCidade);
-   //             var content = new StringContent(cidadeJson, Encoding.UTF8, "application/json");
-   //             var result = await client.PutAsync("MicroServiceCidade", content);
-   //             if (result.IsSuccessStatusCode)
-   //                 return editarCidade;
-   //             else
-   //                 editarCidade = null;
-   //             return editarCidade;
-   //         }
-   //     }
+        public static async Task<Cidade> PutCidade(Cidade editarCidade)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUri);
+                var cidadeJson = JsonConvert.SerializeObject(editarCidade);
+                var content = new StringContent(cidadeJson, Encoding.UTF8, "application/json");
+                var result = await client.PutAsync($"Cidades/{editarCidade.Id}", content);
+                if (result.IsSuccessStatusCode)
+                    return editarCidade;
+                else
+                    editarCidade = null;
+                return editarCidade;
+            }
+        }
 
-   //     public static async Task<Cidade> DeleteCidade(Cidade removerCidade)
-   //     {
-   //         try
-   //         {
-   //             using (var client = new HttpClient())
-   //             {
-   //                 client.BaseAddress = new Uri(_baseUri);
-   //                 var cidadeJson = JsonConvert.SerializeObject(removerCidade);
-   //                 var content = new StringContent(cidadeJson, Encoding.UTF8, "application/json");
-   //                 var result = await client.DeleteAsync("MicroServiceCidade");
-   //                 if (result.IsSuccessStatusCode)
-   //                     return removerCidade;
-   //                 else
-   //                     removerCidade = null;
-   //                 return removerCidade;
-   //             }
-   //         }
-   //         catch (Exception)
-			//{
-   //             throw;
-			//}
-   //     }
+        public static async Task<string> DeleteCidade(string id)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+                    var result = await client.DeleteAsync("Cidades/" + id);
+                    if (result.IsSuccessStatusCode)
+                        return "OK";
+                    else
+                        return "Falhou";
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }

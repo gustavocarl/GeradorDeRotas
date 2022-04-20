@@ -19,11 +19,10 @@ namespace MVCGeradorDeRotas.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index(Model.Cidade cidade)
+        public async Task<IActionResult> Index()
         {
-            var a = CidadeServices.GetNome("Araraquara");
-            return View(a);
-    }    
+            return View();
+        }
 
         public IActionResult Privacy()
         {

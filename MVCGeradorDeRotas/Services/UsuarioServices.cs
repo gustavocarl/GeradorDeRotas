@@ -98,7 +98,7 @@ namespace MVCGeradorDeRotas
                     client.BaseAddress = new Uri(_baseUri);
                     var usuarioJson = JsonConvert.SerializeObject(novoUsuario);
                     var content = new StringContent(usuarioJson, Encoding.UTF8, "application/json");
-                    var result = await client.PostAsync("MicroServiceUsuario", content);
+                    var result = await client.PostAsync("Usuarios/", content);
                     if (result.IsSuccessStatusCode)
                         return novoUsuario;
                     else
@@ -112,51 +112,48 @@ namespace MVCGeradorDeRotas
             }
         }
 
-        //public static async Task<Usuario> PutUsuario(Usuario editarUsuario)
-        //{
-        //    try
-        //    {
-        //        using (var client = new HttpClient())
-        //        {
-        //            client.BaseAddress = new Uri(_baseUri);
-        //            var jsonUsuario = JsonConvert.SerializeObject(editarUsuario);
-        //            var content = new StringContent(jsonUsuario, Encoding.UTF8, "application/json");
-        //            var result = await client.PutAsync("MicroServiceUsuario", content);
-        //            if (result.IsSuccessStatusCode)
-        //                return editarUsuario;
-        //            else
-        //                editarUsuario = null;
-        //            return editarUsuario;
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        public static async Task<Usuario> PutUsuario(Usuario editarUsuario)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+                    var jsonUsuario = JsonConvert.SerializeObject(editarUsuario);
+                    var content = new StringContent(jsonUsuario, Encoding.UTF8, "application/json");
+                    var result = await client.PutAsync($"Usuarios/{editarUsuario.Id}", content);
+                    if (result.IsSuccessStatusCode)
+                        return editarUsuario;
+                    else
+                        editarUsuario = null;
+                    return editarUsuario;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-        //public static async Task<Usuario> DeleteUsuario(Usuario removerUsuario)
-        //{
-        //    try
-        //    {
-        //        using (var client = new HttpClient())
-        //        {
-        //            client.BaseAddress = new Uri(_baseUri);
-        //            var usuarioJson = JsonConvert.SerializeObject(removerUsuario);
-        //            var content = new StringContent(usuarioJson, Encoding.UTF8, "application/json");
-        //            var result = await client.DeleteAsync("MicroServiceCidade");
-        //            if (result.IsSuccessStatusCode)
-        //                return removerUsuario;
-        //            else
-        //                removerUsuario = null;
-        //            return removerUsuario;
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        public static async Task<string> DeleteUsuario(string id)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+                    var result = await client.DeleteAsync("Usuarios/" + id);
+                    if (result.IsSuccessStatusCode)
+                        return "OK";
+                    else
+                        return "Falhou";
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }
