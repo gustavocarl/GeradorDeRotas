@@ -21,7 +21,6 @@ namespace MVCGeradorDeRotas.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var a = await UsuarioServices.Get();
             return View();
         }
 

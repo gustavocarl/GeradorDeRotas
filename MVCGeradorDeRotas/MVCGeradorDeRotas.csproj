@@ -5,11 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Equipe\" />
+    <Folder Include="Views\Cidade\" />
+    <Folder Include="Views\Usuario\" />
+    <Folder Include="Views\Pessoa\" />
   </ItemGroup>
 
 </Project>

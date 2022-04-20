@@ -40,5 +40,36 @@ namespace MVCGeradorDeRotas
                 throw;
             }
         }
+
+        public static async Task<Usuario> Get(string id)
+        {
+            var usuarioJson = new Usuario();
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+
+                    HttpResponseMessage response = await client.GetAsync("Usuarios/" + id);
+                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = response.Content.ReadAsStringAsync().Result;
+                        usuarioJson = JsonConvert.DeserializeObject<Usuario>(responseBody);
+                    }
+                    return usuarioJson;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
     }
 }

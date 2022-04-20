@@ -40,5 +40,60 @@ namespace MVCGeradorDeRotas.Services
             }
         }
 
+
+        public static async Task<Pessoa> Get(string id)
+        {
+            var pessoasJson = new Pessoa();
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+                    HttpResponseMessage response = await client.GetAsync("Pessoas/" + id);
+                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = response.Content.ReadAsStringAsync().Result;
+                        pessoasJson = JsonConvert.DeserializeObject<Pessoa>(responseBody);
+                    }
+
+                    return pessoasJson;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static async Task<Pessoa> GetNome(string nome)
+        {
+            var pessoasJson = new Pessoa();
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+                    HttpResponseMessage response = await client.GetAsync("Pessoas/" + nome);
+                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = response.Content.ReadAsStringAsync().Result;
+                        pessoasJson = JsonConvert.DeserializeObject<Pessoa>(responseBody);
+                    }
+
+                    return pessoasJson;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
