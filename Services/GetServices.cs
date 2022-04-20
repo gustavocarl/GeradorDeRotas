@@ -130,13 +130,11 @@ namespace Services
         {
             try
             {
-
                 HttpResponseMessage response = await client.GetAsync("https://localhost:44381/api/Equipes/" + nome);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var equipeJson = JsonConvert.DeserializeObject<Equipe>(responseBody);
                 return equipeJson;
-
             }
             catch (Exception)
             {
@@ -144,7 +142,7 @@ namespace Services
             }
         }
 
-        public static async Task<List<Usuario>> BuscarTodosUsuarios(string id)
+        public static async Task<List<Usuario>> BuscarTodosUsuarios()
         {
             try
             {
@@ -159,6 +157,5 @@ namespace Services
                 throw;
             }
         }
-
     }
 }

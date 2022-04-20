@@ -31,23 +31,14 @@ namespace MicroServiceUsuario.Controllers
             return buscarUsuario;
         }
 
-        [HttpGet("{nome}", Name = "GetUsuarioNome")]
-        public ActionResult<Usuario> GetNome(string nome)
-        {
-            var buscarUsuario = _usuarioServices.GetNome(nome);
-            if (buscarUsuario == null)
-                return BadRequest("Usuário não encontrado");
-            return buscarUsuario;
-        }
-
-        [HttpGet("login/{login}", Name = "GetUsuarioLogin")]
+        [HttpGet("{login}", Name = "GetLoginUsuario")]
         public ActionResult<Usuario> GetLogin(string login)
-        {
+		{
             var buscarUsuario = _usuarioServices.GetLogin(login);
             if (buscarUsuario == null)
                 return BadRequest("Usuário não encontrado");
             return buscarUsuario;
-        }
+		}
 
         [HttpPost]
         public ActionResult<Usuario> Create(Usuario novoUsuario)

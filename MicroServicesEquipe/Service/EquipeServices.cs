@@ -32,10 +32,9 @@ namespace MicroServicesEquipe.Service
 
             foreach (var item in novaEquipe.Pessoa)
             {
-
                 try
                 {
-                    Pessoa verificarPessoa = await GetServices.BuscarPessoaNomeAPI(item.NomeCompleto);
+                    Pessoa verificarPessoa = await ServicesPessoa.GetNome(item.NomeCompleto);
                     UpdateServices.UpdatePessoa(item.NomeCompleto, new Pessoa()
                     {
                         Id = verificarPessoa.Id,
@@ -50,14 +49,13 @@ namespace MicroServicesEquipe.Service
                 }
             }
 
-            var buscarCidade = await GetServices.BuscarCidadeNomeAPI(novaEquipe.Cidade.Nome);
+            var buscarCidade = await ServicesCidade.GetNome(novaEquipe.Cidade.Nome);
 
             novaEquipe.Pessoa = listaPessoas;
             novaEquipe.Cidade = buscarCidade;
 
             _equipe.InsertOne(novaEquipe);
             return novaEquipe;
-
         }
 
         public void Update(string id, Equipe equipeIn) => _equipe.ReplaceOne(equipe => equipe.Id == id, equipeIn);

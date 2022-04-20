@@ -2,18 +2,17 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MVCGeradorDeRotas.Services
+namespace Services
 {
-    public class PessoaServices
+    public class ServicesPessoa
     {
-
         private static readonly string _baseUri = "https://localhost:44370/api/";
-        public PessoaServices() { }
+
 
         public static async Task<List<Pessoa>> Get()
         {
@@ -78,7 +77,6 @@ namespace MVCGeradorDeRotas.Services
                         string responseBody = response.Content.ReadAsStringAsync().Result;
                         pessoasJson = JsonConvert.DeserializeObject<Pessoa>(responseBody);
                     }
-
                     return pessoasJson;
                 }
             }
@@ -111,51 +109,51 @@ namespace MVCGeradorDeRotas.Services
             }
         }
 
-        //public static async Task<Pessoa> PutPessoa(Pessoa editarPessoa)
-        //{
-        //    try
-        //    {
-        //        using (var client = new HttpClient())
-        //        {
-        //            client.BaseAddress = new Uri(_baseUri);
-        //            var jsonPessoa = JsonConvert.SerializeObject(editarPessoa);
-        //            var content = new StringContent(jsonPessoa, Encoding.UTF8, "application/json");
-        //            var result = await client.PutAsync("MicroServicesPessoa", content);
-        //            if (result.IsSuccessStatusCode)
-        //                return editarPessoa;
-        //            else
-        //                editarPessoa = null;
-        //            return editarPessoa;
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        public static async Task<Pessoa> PutPessoa(Pessoa editarPessoa, Pessoa pessoaIn)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+                    var jsonPessoa = JsonConvert.SerializeObject(editarPessoa);
+                    var content = new StringContent(jsonPessoa, Encoding.UTF8, "application/json");
+                    var result = await client.PutAsync("MicroServicesPessoa", content);
+                    if (result.IsSuccessStatusCode)
+                        return editarPessoa;
+                    else
+                        editarPessoa = null;
+                    return editarPessoa;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-        //public static async Task<Pessoa> DeletePessoa(Pessoa removerPessoa)
-        //{
-        //    try
-        //    {
-        //        using (var client = new HttpClient())
-        //        {
-        //            client.BaseAddress = new Uri(_baseUri);
-        //            var pessoaJson = JsonConvert.SerializeObject(removerPessoa);
-        //            var content = new StringContent(pessoaJson, Encoding.UTF8, "application/json");
-        //            var result = await client.DeleteAsync("MicroServicesPessoa");
-        //            if (result.IsSuccessStatusCode)
-        //                return removerPessoa;
-        //            else
-        //                removerPessoa = null;
-        //            return removerPessoa;
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        public static async Task<Pessoa> DeletePessoa(Pessoa removerPessoa)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+                    var pessoaJson = JsonConvert.SerializeObject(removerPessoa);
+                    var content = new StringContent(pessoaJson, Encoding.UTF8, "application/json");
+                    var result = await client.DeleteAsync("MicroServicesPessoa");
+                    if (result.IsSuccessStatusCode)
+                        return removerPessoa;
+                    else
+                        removerPessoa = null;
+                    return removerPessoa;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }
