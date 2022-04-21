@@ -9,6 +9,30 @@ namespace MVCGeradorDeRotas.Controllers
     {
         public async Task<IActionResult> Index()
         {
+            string user = "Anonymous";
+            bool authenticate = false;
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                user = HttpContext.User.Identity.Name;
+                authenticate = true;
+
+                if (HttpContext.User.IsInRole("Admin"))
+                    ViewBag.Role = "Admin";
+                else
+                    ViewBag.Role = "User";
+
+            }
+            else
+            {
+                user = "Não Logado";
+                authenticate = false;
+                ViewBag.Role = "";
+            }
+
+            ViewBag.User = user;
+            ViewBag.Authenticate = authenticate;
+
             var buscarPessoas = await PessoaServices.Get();
             return View(buscarPessoas);
         }

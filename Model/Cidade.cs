@@ -19,7 +19,7 @@ namespace Model
         
         public string Nome { get; set; }
 
-        public string UF { get; set; }
+        public string UF { get; set; } = "SP";
 
     }
 }

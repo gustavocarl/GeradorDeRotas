@@ -43,7 +43,6 @@ namespace MicroServiceUsuario.Controllers
         [HttpPost]
         public ActionResult<Usuario> Create(Usuario novoUsuario)
         {
-
             var buscarUsuario = _usuarioServices.GetLogin(novoUsuario.Login);
 
             if (buscarUsuario != null)

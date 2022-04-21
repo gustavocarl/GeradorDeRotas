@@ -23,5 +23,7 @@ namespace Model
         [Display(Name = "Nome Completo")]
         public string NomeCompleto { get; set; }
 
+        public string Role { get; set; } = "User";
+
     }
 }
