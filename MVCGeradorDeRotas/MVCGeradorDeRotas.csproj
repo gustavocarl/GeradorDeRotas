@@ -14,10 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Equipe\" />
-    <Folder Include="Views\Cidade\" />
-    <Folder Include="Views\Pessoa\" />
-    <Folder Include="Views\Usuario\" />
+    <Folder Include="Views\Equipes\" />
   </ItemGroup>
 
 </Project>

@@ -13,6 +13,7 @@ namespace Services
     {
         private static readonly string _baseUri = "https://localhost:44370/api/";
 
+        public ServicesPessoa() { }
 
         public static async Task<List<Pessoa>> Get()
         {

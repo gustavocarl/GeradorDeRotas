@@ -112,8 +112,9 @@ namespace MVCGeradorDeRotas
             }
         }
 
-        public static async Task<Usuario> PutUsuario(Usuario editarUsuario)
+        public static async Task<Usuario> PutUsuario(string id, Usuario editarUsuario)
         {
+            var usuario = new Usuario();
             try
             {
                 using (var client = new HttpClient())
@@ -129,13 +130,14 @@ namespace MVCGeradorDeRotas
                     return editarUsuario;
                 }
             }
-            catch (Exception)
+            catch (HttpRequestException)
             {
-                throw;
+                usuario = null;
+                return usuario;
             }
         }
 
-        public static async Task<string> DeleteUsuario(string id)
+        public static async Task<Usuario> DeleteUsuario(string id, Usuario usuario)
         {
             try
             {
@@ -144,16 +146,17 @@ namespace MVCGeradorDeRotas
                     client.BaseAddress = new Uri(_baseUri);
                     var result = await client.DeleteAsync("Usuarios/" + id);
                     if (result.IsSuccessStatusCode)
-                        return "OK";
+                        return usuario;
                     else
-                        return "Falhou";
+                        usuario = null;
+                    return usuario;
                 }
             }
-            catch (Exception)
+            catch (HttpRequestException)
             {
-                throw;
+                usuario = null;
+                return usuario;
             }
         }
-
     }
 }

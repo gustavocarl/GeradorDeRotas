@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Model
 {
@@ -9,6 +10,7 @@ namespace Model
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+        [Display(Name = "Nome Completo")]
         public string NomeCompleto { get; set; }
 
         public bool Disponivel { get; set; } = true;

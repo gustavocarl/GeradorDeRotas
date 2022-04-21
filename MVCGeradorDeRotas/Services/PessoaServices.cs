@@ -63,31 +63,6 @@ namespace MVCGeradorDeRotas.Services
             }
         }
 
-        public static async Task<Pessoa> GetNome(string nome)
-        {
-            var pessoasJson = new Pessoa();
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(_baseUri);
-                    HttpResponseMessage response = await client.GetAsync("Pessoas/" + nome);
-                    response.EnsureSuccessStatusCode();
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseBody = response.Content.ReadAsStringAsync().Result;
-                        pessoasJson = JsonConvert.DeserializeObject<Pessoa>(responseBody);
-                    }
-
-                    return pessoasJson;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public static async Task<Pessoa> PostPessoa(Pessoa novaPessoa)
         {
             try
@@ -111,48 +86,55 @@ namespace MVCGeradorDeRotas.Services
             }
         }
 
-		public static async Task<Pessoa> PutPessoa(Pessoa editarPessoa)
-		{
-			try
-			{
-				using (var client = new HttpClient())
-				{
-					client.BaseAddress = new Uri(_baseUri);
-					var jsonPessoa = JsonConvert.SerializeObject(editarPessoa);
-					var content = new StringContent(jsonPessoa, Encoding.UTF8, "application/json");
-					var result = await client.PutAsync($"Pessoas/{editarPessoa.Id}", content);
-					if (result.IsSuccessStatusCode)
-						return editarPessoa;
-					else
-						editarPessoa = null;
-					return editarPessoa;
-				}
-			}
-			catch (Exception)
-			{
-				throw;
-			}
-		}
+        public static async Task<Pessoa> PutPessoa(string id, Pessoa editarPessoa)
+        {
+            var pessoa = new Pessoa();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+                    var jsonPessoa = JsonConvert.SerializeObject(editarPessoa);
+                    var content = new StringContent(jsonPessoa, Encoding.UTF8, "application/json");
+                    var result = await client.PutAsync($"Pessoas/{editarPessoa.Id}", content);
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return editarPessoa;
+                    }
+                    else
+                        editarPessoa = null;
+                    return editarPessoa;
+                }
+            }
+            catch (HttpRequestException)
+            {
+                pessoa = null;
+                return pessoa;
+            }
+        }
 
-		public static async Task<string> DeletePessoa(string id)
-		{
-			try
-			{
-				using (var client = new HttpClient())
-				{
-					client.BaseAddress = new Uri(_baseUri);
-					var result = await client.DeleteAsync("Pessoas/" + id);
-					if (result.IsSuccessStatusCode)
-						return "Ok";
-					else
-					return "Falhou";
-				}
-			}
-			catch (Exception)
-			{
-				throw;
-			}
-		}
+        public static async Task<Pessoa> DeletePessoa(string id, Pessoa pessoa)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+                    var result = await client.DeleteAsync("Pessoas/" + id);
+                    if (result.IsSuccessStatusCode)
+                        return pessoa;
+                    else
+                        pessoa = null;
 
-	}
+                    return pessoa;
+                }
+            }
+            catch (HttpRequestException)
+            {
+                pessoa = null;
+                return pessoa;
+            }
+        }
+
+    }
 }

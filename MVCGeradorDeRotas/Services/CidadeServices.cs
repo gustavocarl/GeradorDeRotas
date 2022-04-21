@@ -57,38 +57,9 @@ namespace MVCGeradorDeRotas.Services
                     }
                     return cidadeJson;
                 }
-
             }
             catch (Exception)
             {
-
-                throw;
-            }
-        }
-
-        public static async Task<Cidade> GetNome(string nome)
-        {
-            var cidadeJson = new Cidade();
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(_baseUri);
-
-                    HttpResponseMessage response = await client.GetAsync("Cidades/" + nome);
-                    response.EnsureSuccessStatusCode();
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseBody = response.Content.ReadAsStringAsync().Result;
-                        cidadeJson = JsonConvert.DeserializeObject<Cidade>(responseBody);
-                    }
-                    return cidadeJson;
-                }
-
-            }
-            catch (Exception)
-            {
-
                 throw;
             }
         }
@@ -109,23 +80,33 @@ namespace MVCGeradorDeRotas.Services
             }
         }
 
-        public static async Task<Cidade> PutCidade(Cidade editarCidade)
+        public static async Task<Cidade> PutCidade(string id, Cidade editarCidade)
         {
-            using (var client = new HttpClient())
+            var cidade = new Cidade();
+            try
             {
-                client.BaseAddress = new Uri(_baseUri);
-                var cidadeJson = JsonConvert.SerializeObject(editarCidade);
-                var content = new StringContent(cidadeJson, Encoding.UTF8, "application/json");
-                var result = await client.PutAsync($"Cidades/{editarCidade.Id}", content);
-                if (result.IsSuccessStatusCode)
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+                    var cidadeJson = JsonConvert.SerializeObject(editarCidade);
+                    var content = new StringContent(cidadeJson, Encoding.UTF8, "application/json");
+                    var result = await client.PutAsync($"Cidades/{editarCidade.Id}", content);
+                    if (result.IsSuccessStatusCode)
+                        return editarCidade;
+                    else
+                        editarCidade = null;
                     return editarCidade;
-                else
-                    editarCidade = null;
-                return editarCidade;
+                }
+            }
+            catch (HttpRequestException)
+            {
+                cidade = null;
+                return cidade;
             }
         }
 
-        public static async Task<string> DeleteCidade(string id)
+        public static async Task<Cidade> DeleteCidade(string id, Cidade cidade)
         {
             try
             {
@@ -134,14 +115,16 @@ namespace MVCGeradorDeRotas.Services
                     client.BaseAddress = new Uri(_baseUri);
                     var result = await client.DeleteAsync("Cidades/" + id);
                     if (result.IsSuccessStatusCode)
-                        return "OK";
+                        return cidade;
                     else
-                        return "Falhou";
+                        cidade = null;
+                    return cidade;
                 }
             }
-            catch (Exception)
+            catch (HttpRequestException)
             {
-                throw;
+                cidade = null;
+                return cidade;
             }
         }
 
