@@ -1,7 +1,9 @@
 ﻿using Model;
 using ReadXLS.Read;
+using Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ReadXLS
 {
@@ -9,20 +11,13 @@ namespace ReadXLS
     {
         static void Main(string[] args)
         {
-            var servicos = ReadAndWriteFile.ReadXls();
+            var servicos = CidadesAPI.GetCidadesAPI();
 
-            foreach(var item in servicos)
-            {
-                Console.WriteLine($"\nOS: {item.OS} " +
-                    $"\nCidade: {item.Cidade} " +
-                    $"\nBase: {item.Base} " +
-                    $"\nServiço: {item.Servico} " +
-                    $"\nEndereço: {item.Endereco} " +
-                    $"\nNúmero: {item.Numero} " +
-                    $"\nComplemento: {item.Complemento} " +
-                    $"\nCEP: {item.CEP} " +
-                    $"\nBairro: {item.Bairro} ");
+            for (int i = 0; i < 10; i++)
+			{
+                Console.WriteLine(servicos.ToString());
             }
+
         }
     }
 }

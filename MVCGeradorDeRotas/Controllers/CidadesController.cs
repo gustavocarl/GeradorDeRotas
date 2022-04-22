@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Model;
 using MVCGeradorDeRotas.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MVCGeradorDeRotas.Controllers
 {
     public class CidadesController : Controller
     {
+
+        IWebHostEnvironment _appEnvironment;
+
+        public CidadesController(IWebHostEnvironment appEnvironment)
+        {
+            _appEnvironment = appEnvironment;
+        }
+
         public async Task<IActionResult> Index()
         {
             string user = "Anonymous";
@@ -40,6 +50,10 @@ namespace MVCGeradorDeRotas.Controllers
 
         public IActionResult Create()
         {
+            List<Cidade> cidades = LeituraDeArquivos.LerArquivoTxtCidades(_appEnvironment.WebRootPath);
+
+            ViewBag.Cidades = cidades;
+
             return View();
         }
 

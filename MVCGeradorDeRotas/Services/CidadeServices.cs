@@ -11,7 +11,9 @@ namespace MVCGeradorDeRotas.Services
     public class CidadeServices
     {
         private static readonly string _baseUri = "https://localhost:44366/api/";
-
+        
+        private static readonly string _baseUriCidades = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/SP/";
+        
         public CidadeServices() { }
 
         public static async Task<List<Cidade>> Get()
@@ -23,7 +25,7 @@ namespace MVCGeradorDeRotas.Services
                 {
                     client.BaseAddress = new Uri(_baseUri);
 
-                    HttpResponseMessage response = await client.GetAsync("Cidades");
+                    HttpResponseMessage response = await client.GetAsync("Cidades/");
                     response.EnsureSuccessStatusCode();
                     if (response.IsSuccessStatusCode)
                     {
@@ -39,7 +41,34 @@ namespace MVCGeradorDeRotas.Services
             }
         }
 
-        public static async Task<Cidade> GetId(string id)
+		//public static async Task<List<Cidade>> GetCidadesIBGE()
+		//{
+		//	var cidadesJson = new List<Cidade>();
+
+		//	try
+		//	{
+		//		using (var client = new HttpClient())
+		//		{
+		//			client.BaseAddress = new Uri(_baseUriCidades);
+
+		//			HttpResponseMessage response = await client.GetAsync("municipios?view=nivelado");
+		//			response.EnsureSuccessStatusCode();
+		//			if (response.IsSuccessStatusCode)
+		//			{
+		//				string responseBody = response.Content.ReadAsStringAsync().Result;
+		//				cidadesJson = JsonConvert.DeserializeObject<List<Cidade>>(responseBody);
+		//			}
+		//			return cidadesJson;
+		//		}
+		//	}
+		//	catch (HttpRequestException)
+		//	{
+		//		cidadesJson = null;
+		//		return cidadesJson;
+		//	}
+		//}
+
+		public static async Task<Cidade> GetId(string id)
         {
             var cidadeJson = new Cidade();
             try
