@@ -13,6 +13,6 @@ namespace Model
         [Display(Name = "Nome Completo")]
         public string NomeCompleto { get; set; }
 
-        public bool Disponivel { get; set; } = true;
+        public string NomeEquipe { get; set; } = string.Empty;
     }
 }

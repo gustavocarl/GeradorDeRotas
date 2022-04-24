@@ -31,6 +31,7 @@ namespace MVCGeradorDeRotas
            config.AccessDeniedPath = "/Home/AccessDenied";
            config.ExpireTimeSpan = TimeSpan.FromHours(1);
        });
+
             services.AddControllersWithViews();
         }
 

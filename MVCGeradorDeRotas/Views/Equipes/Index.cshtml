@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Model.Equipe>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Equipe</h1>
+<hr />
+
+
+@if (!ViewBag.Authenticate)
+{
+	<div class="row h5">
+		<div class="col-md-12">
+			<span>Para acessar essa página, é necessário estar logado no sistema.</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 p-0 m-1">
+			<form method="post" asp-controller="Home" asp-action="Index">
+				<input class="btn btn-link" type="submit" value="Entrar" />
+			</form>
+		</div>
+	</div>
+}
+else
+{
+	<p>
+		<a asp-action="Create">Cadastrar Equipe</a>
+	</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.Nome)
+				</th>
+				<th class="text-center">
+					@Html.DisplayNameFor(model => model.Cidade)
+				</th>
+				<th class="text-center">
+					@Html.DisplayNameFor(model => model.Pessoa)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.Nome)
+					</td>
+					<td class="text-center">
+						@Html.DisplayFor(modelItem => item.Cidade.Nome)
+					</td>
+					<td class="text-center">
+						<select style="width: 200px">
+							@for (var i = 0; i < item.Pessoa.Count; i++)
+							{
+								<option value="@item.Pessoa[i].NomeCompleto">@item.Pessoa[i].NomeCompleto</option>
+							}
+						</select>
+					</td>
+					<td>
+						<a asp-action="Delete" asp-route-id="@item.Id">Remover</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}

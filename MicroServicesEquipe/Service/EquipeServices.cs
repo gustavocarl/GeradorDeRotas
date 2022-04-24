@@ -39,7 +39,7 @@ namespace MicroServicesEquipe.Service
                     {
                         Id = verificarPessoa.Id,
                         NomeCompleto = verificarPessoa.NomeCompleto,
-                        Disponivel = verificarPessoa.Disponivel = false
+                        NomeEquipe = verificarPessoa.NomeEquipe
                     });
                     listaPessoas.Add(verificarPessoa);
                 }

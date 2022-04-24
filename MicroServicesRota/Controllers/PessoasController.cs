@@ -39,20 +39,6 @@ namespace MicroServicesPessoa.Controllers
             return buscarPessoa;
         }
 
-        [HttpGet("{nome}/{disponibilidade}")]
-        public ActionResult<Pessoa> GetDisponibilidade(string nome, bool disponibilidade)
-        {
-
-            var buscarPessoa = _pessoaServices.GetDisponibilidade(nome, disponibilidade);
-            if (buscarPessoa == null)
-                return BadRequest("Pessoa não disponível");
-
-            if (buscarPessoa.NomeCompleto == nome && buscarPessoa.Disponivel == false)
-                return BadRequest("Pessoa já está em uma equipe");
-            return buscarPessoa;
-
-        }
-
         [HttpPost]
         public ActionResult<Pessoa> Create(Pessoa novaPessoa)
         {

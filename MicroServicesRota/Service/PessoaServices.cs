@@ -22,8 +22,6 @@ namespace MicroServicesRota.Service
 
         public Pessoa GetNome(string nome) => _pessoa.Find<Pessoa>(pessoa => pessoa.NomeCompleto == nome).FirstOrDefault();
 
-        public Pessoa GetDisponibilidade(string nome, bool disponivel) => _pessoa.Find<Pessoa>(pessoa => pessoa.NomeCompleto == nome && pessoa.Disponivel == disponivel).FirstOrDefault();
-
         public Pessoa Create(Pessoa novaPessoa)
         {
             _pessoa.InsertOne(novaPessoa);

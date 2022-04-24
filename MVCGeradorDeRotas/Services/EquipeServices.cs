@@ -30,12 +30,15 @@ namespace MVCGeradorDeRotas.Services
                         string responseBody = response.Content.ReadAsStringAsync().Result;
                         equipeJson = JsonConvert.DeserializeObject<List<Equipe>>(responseBody);
                     }
-                    return equipeJson;
+                    else
+                        equipeJson = null;
                 }
+                return equipeJson;
             }
             catch (Exception)
             {
-                throw;
+                equipeJson = null;
+                return equipeJson;
             }
         }
 
@@ -55,12 +58,15 @@ namespace MVCGeradorDeRotas.Services
                         string responseBody = response.Content.ReadAsStringAsync().Result;
                         equipeJson = JsonConvert.DeserializeObject<Equipe>(responseBody);
                     }
+                    else
+                        equipeJson = null;
                     return equipeJson;
                 }
             }
             catch (Exception)
             {
-                throw;
+                equipeJson = null;
+                return equipeJson;
             }
         }
 
@@ -80,12 +86,15 @@ namespace MVCGeradorDeRotas.Services
                         string responseBody = response.Content.ReadAsStringAsync().Result;
                         equipeJson = JsonConvert.DeserializeObject<Equipe>(responseBody);
                     }
+                    else
+                        equipeJson = null;
                     return equipeJson;
                 }
             }
             catch (Exception)
             {
-                throw;
+                equipeJson = null;
+                return equipeJson;
             }
         }
 
@@ -112,15 +121,17 @@ namespace MVCGeradorDeRotas.Services
             }
         }
 
-        public static async Task<Equipe> PutEquipe(Equipe editarEquipe)
+        public static async Task<Equipe> PutEquipe(string id, Equipe editarEquipe)
         {
+            var equipe = new Equipe();
+
             try
             {
                 using (var client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(_baseUri);
-                    var equipeJson = JsonConvert.SerializeObject(editarEquipe);
-                    var content = new StringContent(equipeJson, Encoding.UTF8, "application/json");
+                    var jsonEquipe = JsonConvert.SerializeObject(editarEquipe);
+                    var content = new StringContent(jsonEquipe, Encoding.UTF8, "application/json");
                     var result = await client.PutAsync($"Equipes/{editarEquipe.Id}", content);
                     if (result.IsSuccessStatusCode)
                         return editarEquipe;
@@ -129,13 +140,14 @@ namespace MVCGeradorDeRotas.Services
                     return editarEquipe;
                 }
             }
-            catch (Exception)
+            catch (HttpRequestException)
             {
-                throw;
+                equipe = null;
+                return equipe;
             }
         }
 
-        public static async Task<string> DeleteEquipe(string id)
+        public static async Task<Equipe> DeleteEquipe(string id, Equipe equipe)
         {
             try
             {
@@ -144,14 +156,16 @@ namespace MVCGeradorDeRotas.Services
                     client.BaseAddress = new Uri(_baseUri);
                     var result = await client.DeleteAsync("Equipes/" + id);
                     if (result.IsSuccessStatusCode)
-                        return "OK";
+                        return equipe;
                     else
-                        return "Falhou";
+                        equipe = null;
+                    return equipe;
                 }
             }
-            catch (Exception)
+            catch (HttpRequestException)
             {
-                throw;
+                equipe = null;
+                return equipe;
             }
         }
 
