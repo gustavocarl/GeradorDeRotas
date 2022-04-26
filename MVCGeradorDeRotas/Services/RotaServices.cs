@@ -43,7 +43,7 @@ namespace MVCGeradorDeRotas.Services
             return rotas;
         }
 
-        public async void Create(Rotas rotas)
+        public void Create(Rotas rotas)
         {
            _rotas.InsertOne(rotas);
         }

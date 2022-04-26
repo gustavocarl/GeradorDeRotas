@@ -10,13 +10,13 @@
 <hr class="m-0 mb-2" />
 @if (@ViewBag.Servico < 5)
 {
-    <span>Total de Serviço(s): <b>@ViewBag.Servico</b>.</span>
+    <span>Total de Serviço(s): <b>@ViewBag.QuantidadeServico</b>.</span>
     <br />
     <br />
 }
 else
 {
-    <span>Total de Serviço(s): <b>@ViewBag.Servico</b>.</span>
+    <span>Total de Serviço(s): <b>@ViewBag.QuantidadeServico</b>.</span>
     <p>
     <small class="text-danger"><i><strong>Só é permitido o máximo de 5 serviços por equipe.</strong></i></small>
     <small class="text-danger"><i><strong>Caso seja direcionado um número maior, a rota não será gerada.</strong></i></small>

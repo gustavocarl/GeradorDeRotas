@@ -95,7 +95,7 @@ namespace MVCGeradorDeRotas.Services
                 ExcelWorksheet planilha = package.Workbook.Worksheets[0];
                 int colunas = planilha.Dimension.End.Column;
 
-                for (int i = 1; i < colunas; i++)
+                for (int i = 1; i < colunas + 1; i++)
                 {
                     cabecalhoExcel.Add(planilha.Cells[1, i].Value.ToString());
                 }
@@ -120,7 +120,7 @@ namespace MVCGeradorDeRotas.Services
                 int colunas = planilha.Dimension.End.Column;
                 int linhas = planilha.Dimension.End.Row;
 
-                for (int coluna = 1; coluna < colunas; coluna++)
+                for (int coluna = 1; coluna < colunas + 1; coluna++)
                 {
                     if (planilha.Cells[1, coluna].Value.ToString() == nomeColuna)
                     {
@@ -162,7 +162,7 @@ namespace MVCGeradorDeRotas.Services
                 {
                     data = new Dictionary<string, string>();
 
-                    for (int col = 1; col < cols; col++)
+                    for (int col = 1; col < cols + 1; col++)
                     {
                         columns.ForEach(column =>
                         {

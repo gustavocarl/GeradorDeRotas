@@ -463,14 +463,20 @@ namespace MVCGeradorDeRotas.Controllers
             }
             else if (listarEquipesPorNome.Count > 1)
             {
-                int serviceSplit = dicionarioServicosECidades.Count / listarEquipesPorNome.Count;
-                decimal restSplit = listarEquipesPorNome.Count % listarEquipesPorNome.Count;
+                int serviceSplit = listarEquipesSelecionadas.Count / listarEquipesSelecionadas.Count;
+                decimal restSplit = dicionarioServicosECidades.Count % listarEquipesSelecionadas.Count;
                 int listEquip = 0;
+
+                if (restSplit > 5)
+                {
+                    serviceSplit = 5;
+                    restSplit = Math.Ceiling((decimal)dicionarioServicosECidades.Count % 5);
+                }
 
                 for (int k = 0; k < dicionarioServicosECidades.Count; k++)
                 {
                     Paragraph paragraphEquip = section.AddParagraph();
-                    TextRange trEquip = paragraphEquip.AppendText($"Nome da Equipe: {listarEquipesPorNome[listEquip].Nome}");
+                    TextRange trEquip = paragraphEquip.AppendText($"Nome da Equipe: {listarEquipesSelecionadas[listEquip]}");
                     trEquip.CharacterFormat.FontSize = 14;
                     trEquip.CharacterFormat.Bold = true;
                     trEquip.CharacterFormat.FontName = "Arial";
@@ -526,13 +532,23 @@ namespace MVCGeradorDeRotas.Controllers
 
                     k--;
 
-                    if (k == dicionarioServicosECidades.Count - 2)
+                    if (restSplit == dicionarioServicosECidades.Count - (k + 1) && restSplit != 0)
                     {
-                        k++;
+                        //k++;
 
-                        if (restSplit > 0)
+                        Paragraph paragraphEquipRest = section.AddParagraph();
+                        TextRange trEquipRest = paragraphEquipRest.AppendText($"Nome da Equipe: {listarEquipesPorNome[listEquip].Nome}");
+                        trEquipRest.CharacterFormat.FontSize = 14;
+                        trEquipRest.CharacterFormat.Bold = true;
+                        trEquipRest.CharacterFormat.FontName = "Arial";
+
+                        emptyParagraph = section.AddParagraph();
+                        emptyParagraph.AppendText(" ");
+
+
+                        for (int i = 0; i < restSplit; i++)
                         {
-                            var dictionary = dicionarioServicosECidades[dicionarioServicosECidades.Count - 1];
+                            var dictionary = dicionarioServicosECidades[k];
 
                             Paragraph paragraph1 = section.AddParagraph();
                             TextRange tr1 = paragraph1.AppendText($"Contrato: {(dictionary.ContainsKey("CONTRATO") ? dictionary["CONTRATO"] : "                     ")} - Assinante: {(dictionary.ContainsKey("ASSINANTE") ? dictionary["ASSINANTE"] : "                            ")} - Período:     :     /     :     .");
@@ -570,6 +586,8 @@ namespace MVCGeradorDeRotas.Controllers
 
                             emptyParagraph = section.AddParagraph();
                             emptyParagraph.AppendText(" ");
+
+                            k++;
                         }
                     }
                 }
@@ -578,11 +596,12 @@ namespace MVCGeradorDeRotas.Controllers
             servico = servico.Replace("Ç", "C").Replace("ç", "c").Replace("Ã", "A").Replace("ã", "a").Replace("É", "e").Replace("é", "e").Replace(" ", "");
             cidade = cidade.Replace("Ç", "C").Replace("ç", "c").Replace("Ã", "A").Replace("ã", "a").Replace("É", "e").Replace("é", "e").Replace(" ", "");
 
-            string nameFile = $"Rota{servico}{cidade}{DateTime.Now.Date.ToString("ddMMyyyy")}.docx";
+            string nameFile = $"Route{servico}{cidade}{DateTime.Now.Date.ToString("ddMMyyyy")}.docx";
 
             document.SaveToFile(_appEnvironment.WebRootPath + @"\Arquivo\" + nameFile, FileFormat.Docx);
 
             /* FIM DOC*/
+
 
             Rotas rotas = new Rotas();
             rotas.Data = DateTime.Now.Date.ToString("dd/MM/yyyy");
@@ -592,6 +611,8 @@ namespace MVCGeradorDeRotas.Controllers
             rotas.Equipes = selecionarEquipes;
             rotas.NomeDoArquivo = nameFile;
             rotas.CaminhoCompleto = _appEnvironment.WebRootPath + @"\Arquivo\" + nameFile;
+
+
 
             //RotaServices novaRota = new RotaServices();
 
