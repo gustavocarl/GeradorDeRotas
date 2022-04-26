@@ -9,6 +9,8 @@ namespace MVCGeradorDeRotas.Services
     {
         private readonly IMongoCollection<Rotas> _rotas;
 
+        public RotaServices() { }
+
         public RotaServices(IRotasConfigurationSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
@@ -32,9 +34,18 @@ namespace MVCGeradorDeRotas.Services
             return rotas;
         }
 
-        public void Create(Rotas rotas)
+        public Rotas GetArquivoNome(string NomeDoArquivo)
         {
-            _rotas.InsertOne(rotas);
+            Rotas rotas = new Rotas();
+
+            rotas = _rotas.Find(rotas => rotas.NomeDoArquivo == NomeDoArquivo).FirstOrDefault();
+
+            return rotas;
+        }
+
+        public async void Create(Rotas rotas)
+        {
+           _rotas.InsertOne(rotas);
         }
 
         public async void Delete(string id)

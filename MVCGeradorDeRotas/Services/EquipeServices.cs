@@ -70,6 +70,64 @@ namespace MVCGeradorDeRotas.Services
             }
         }
 
+        public static async Task<List<Equipe>> GetEquipeNome(string equipeNome)
+        {
+            List<Equipe> equipes = new List<Equipe>();
+            Equipe equipe = new Equipe();
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+
+                    HttpResponseMessage response = await client.GetAsync("Equipes/" + equipeNome);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseBody = response.Content.ReadAsStringAsync().Result;
+                        equipes = JsonConvert.DeserializeObject<List<Equipe>>(responseBody);
+                    }
+                    else
+                        equipes = null;
+                }
+                return equipes;
+            }
+            catch (HttpRequestException)
+            {
+                equipes = null;
+                return equipes;
+            }
+        }
+
+        public static async Task<List<Equipe>> GetEquipeCidade(string cidade)
+        {
+            List<Equipe> equipes = new List<Equipe>();
+            Equipe equipe = new Equipe();
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+
+                    HttpResponseMessage response = await client.GetAsync("Equipes/Cidades/" + cidade);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseBody = response.Content.ReadAsStringAsync().Result;
+                        equipes = JsonConvert.DeserializeObject<List<Equipe>>(responseBody);
+                    }
+                    else
+                        equipes = null;
+                }
+                return equipes;
+            }
+            catch (HttpRequestException)
+            {
+                equipes = null;
+                return equipes;
+            }
+        }
+
         public static async Task<Equipe> GetNome(string nome)
         {
             var equipeJson = new Equipe();

@@ -93,6 +93,31 @@ namespace MVCGeradorDeRotas.Services
             }
         }
 
+        public static async Task<Cidade> GetNome(string nome)
+        {
+            var cidadeJson = new Cidade();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_baseUri);
+
+                    HttpResponseMessage response = await client.GetAsync("Cidades/" + nome);
+                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = response.Content.ReadAsStringAsync().Result;
+                        cidadeJson = JsonConvert.DeserializeObject<Cidade>(responseBody);
+                    }
+                    return cidadeJson;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public static async Task<Cidade> PostCidade(Cidade novaCidade)
         {
             using (var client = new HttpClient())

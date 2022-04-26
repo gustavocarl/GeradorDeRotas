@@ -30,17 +30,17 @@ namespace Services
 
                 for (int row = 1; row <= 11; row++)
                 {
-                    var rota = new Rotas();
-                    rota.OS = planilha.Cells[row, 10].Value.ToString();
-                    rota.Cidade = planilha.Cells[row, 19].Value.ToString();
-                    rota.Base = planilha.Cells[row, 20].Value.ToString();
-                    rota.Servico = planilha.Cells[row, 23].Value.ToString();
-                    rota.Endereco = planilha.Cells[row, 27].Value.ToString();
-                    rota.Numero = planilha.Cells[row, 28].Value.ToString();
-                    rota.Complemento = planilha.Cells[row, 29].Value.ToString();
-                    rota.CEP = planilha.Cells[row, 30].Value.ToString();
-                    rota.Bairro = planilha.Cells[row, 32].Value.ToString();
-                    response.Add(rota);
+                    //var rota = new Rotas();
+                    //rota.OS = planilha.Cells[row, 10].Value.ToString();
+                    //rota.Cidade = planilha.Cells[row, 19].Value.ToString();
+                    //rota.Base = planilha.Cells[row, 20].Value.ToString();
+                    //rota.Servico = planilha.Cells[row, 23].Value.ToString();
+                    //rota.Endereco = planilha.Cells[row, 27].Value.ToString();
+                    //rota.Numero = planilha.Cells[row, 28].Value.ToString();
+                    //rota.Complemento = planilha.Cells[row, 29].Value.ToString();
+                    //rota.CEP = planilha.Cells[row, 30].Value.ToString();
+                    //rota.Bairro = planilha.Cells[row, 32].Value.ToString();
+                    //response.Add(rota);
                 }
 
                 Document file = new Document();
@@ -58,15 +58,15 @@ namespace Services
 
                 foreach (var item in response)
                 {
-                    var linha = $"OS: {item.OS}, Base: {item.Base}" +
-                        $"\nCEP: {item.CEP}" +
-                        $"\nEndereço: {item.Endereco} Nº: {item.Numero}" +
-                        $"\nBairro: {item.Bairro} Complemento: {item.Complemento}" +
-                        $"\nServiço: {item.Servico}" +
-                        $"\n\n";
+                    //var linha = $"OS: {item.OS}, Base: {item.Base}" +
+                    //    $"\nCEP: {item.CEP}" +
+                    //    $"\nEndereço: {item.Endereco} Nº: {item.Numero}" +
+                    //    $"\nBairro: {item.Bairro} Complemento: {item.Complemento}" +
+                    //    $"\nServiço: {item.Servico}" +
+                    //    $"\n\n";
                     font.Size = 9;
                     font.Bold = false;
-                    builder.Writeln(linha);
+                    //builder.Writeln(linha);
                 }
 
                 file.Save(@"C:\Doc\Ordem de Servico.docx");

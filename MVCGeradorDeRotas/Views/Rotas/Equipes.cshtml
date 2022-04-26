@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Model.Equipe>
+
+@{
+    ViewData["Title"] = "Equipes";
+}
+
+<h1>Equipes</h1>
+
+<h4>Escolha das Equipes para a cidade de: @ViewBag.Cidades</h4>
+<hr class="m-0 mb-2" />
+@if (@ViewBag.Servico < 5)
+{
+    <span>Total de Serviço(s): <b>@ViewBag.Servico</b>.</span>
+    <br />
+    <br />
+}
+else
+{
+    <span>Total de Serviço(s): <b>@ViewBag.Servico</b>.</span>
+    <p>
+    <small class="text-danger"><i><strong>Só é permitido o máximo de 5 serviços por equipe.</strong></i></small>
+    <small class="text-danger"><i><strong>Caso seja direcionado um número maior, a rota não será gerada.</strong></i></small>
+</p>
+    <br />
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Cidade)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Pessoa)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <form asp-action="GerarRotas">
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td class="col-md-5">
+                    <input type="checkbox" name="selecionarEquipes" value="@item.Nome" id="@item.Nome" class="form-check-inline" />
+                    <label for="@item.Nome">@item.Nome</label>
+                    <br />
+                </td>
+                <td class="text-center col-md-5">
+                        @Html.DisplayFor(modelItem => item.Cidade.Nome)
+                </td>
+                <td>
+                    <select style="width: 300px">
+                            @for (var i = 0; i < item.Pessoa.Count; i++)
+                            {
+                            <option value="@item.Pessoa[i].NomeCompleto">@item.Pessoa[i].NomeCompleto</option>
+                            }
+                    </select>
+                </td>
+            </tr>
+            }
+            <div class="form-group">
+                <input type="submit" value="Gerar Rota" class="btn btn-info" />
+            </div>
+        </form>
+    </tbody>
+</table>

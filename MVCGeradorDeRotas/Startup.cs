@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using MVCGeradorDeRotas.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +34,16 @@ namespace MVCGeradorDeRotas
            config.ExpireTimeSpan = TimeSpan.FromHours(1);
        });
 
+            services.Configure<RotasConfigurationSettings>(
+                Configuration.GetSection(nameof(RotasConfigurationSettings)));
+
+            services.AddSingleton<IRotasConfigurationSettings>(sp =>
+                    sp.GetRequiredService<IOptions<RotasConfigurationSettings>>().Value);
+
+            services.AddSingleton<RotasConfigurationSettings>();
+            
             services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

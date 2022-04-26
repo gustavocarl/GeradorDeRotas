@@ -9,7 +9,6 @@ namespace MVCGeradorDeRotas.Services
         {
             var extensao = "." + arquivo.FileName.Split(".")[arquivo.FileName.Split(".").Length - 1];
             return (extensao == ".xlsx" || extensao == ".xls");
-
         }
 
     }

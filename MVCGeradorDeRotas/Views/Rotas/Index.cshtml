@@ -24,5 +24,20 @@ else
 {
     <h5>Selecione as colunas desejadas</h5>
     <br />
-  
+    <form asp-action="Servicos">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @{
+            List<string> cabecalhos = ViewBag.Cabecalho;
+            foreach (var cabecalho in cabecalhos)
+            {
+                <input type="checkbox" name="selecionarCabecalhos" value="@cabecalho" id="@cabecalho" class="form-check-inline" />
+                <label for="@cabecalho">@cabecalho</label>
+                <br />
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Selecionar" class="btn btn-info" />
+            </div>
+        }
+    </form>
 }

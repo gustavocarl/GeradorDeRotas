@@ -17,23 +17,23 @@ namespace Model
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        [Display(Name = "Nome do Arquivo")]
+        //[Display(Name = "Nome do Arquivo")]
         public string NomeDoArquivo { get; set; }
 
         public string CaminhoCompleto { get; set; }
 
-        [Display(Name = "Serviço")]
+        //[Display(Name = "Serviço")]
         public string Servico { get; set; }
 
-        [Display(Name = "Cidade")]
+        //[Display(Name = "Cidade")]
         public string Cidade { get; set; }
 
-        [Display(Name = "Data da Rota")]
+        //[Display(Name = "Data da Rota")]
         public string Data { get; set; }
 
         public List<string> Cabecalho { get; set; }
 
-        [Display(Name = "Equipes")]
+        //[Display(Name = "Equipes")]
         public List<string> Equipes { get; set; }
 
     }
