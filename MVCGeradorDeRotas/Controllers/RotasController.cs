@@ -91,13 +91,13 @@ namespace MVCGeradorDeRotas.Controllers
             else
                 ViewBag.Role = "User";
 
-            if (!selecionarCabecalhos.Contains("OS") &&
-                !selecionarCabecalhos.Contains("CIDADE") &&
-                !selecionarCabecalhos.Contains("BASE") &&
-                !selecionarCabecalhos.Contains("SERVIÇO") &&
-                !selecionarCabecalhos.Contains("ENDEREÇO") &&
-                !selecionarCabecalhos.Contains("NUMERO") &&
-                !selecionarCabecalhos.Contains("COMPLEMENTO") &&
+            if (!selecionarCabecalhos.Contains("OS") ||
+                !selecionarCabecalhos.Contains("CIDADE") ||
+                !selecionarCabecalhos.Contains("BASE") ||
+                !selecionarCabecalhos.Contains("SERVIÇO") ||
+                !selecionarCabecalhos.Contains("ENDEREÇO") ||
+                !selecionarCabecalhos.Contains("NUMERO") ||
+                !selecionarCabecalhos.Contains("COMPLEMENTO") ||
                 !selecionarCabecalhos.Contains("CEP") &&
                 !selecionarCabecalhos.Contains("BAIRRO"))
             {

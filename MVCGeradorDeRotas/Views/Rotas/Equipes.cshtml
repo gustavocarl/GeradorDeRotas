@@ -17,10 +17,6 @@
 else
 {
     <span>Total de Serviço(s): <b>@ViewBag.QuantidadeServico</b>.</span>
-    <p>
-    <small class="text-danger"><i><strong>Só é permitido o máximo de 5 serviços por equipe.</strong></i></small>
-    <small class="text-danger"><i><strong>Caso seja direcionado um número maior, a rota não será gerada.</strong></i></small>
-</p>
     <br />
 }
 <table class="table">
@@ -52,7 +48,7 @@ else
                         @Html.DisplayFor(modelItem => item.Cidade.Nome)
                 </td>
                 <td>
-                    <select style="width: 300px">
+                    <select multiple style="width: 300px">
                             @for (var i = 0; i < item.Pessoa.Count; i++)
                             {
                             <option value="@item.Pessoa[i].NomeCompleto">@item.Pessoa[i].NomeCompleto</option>
