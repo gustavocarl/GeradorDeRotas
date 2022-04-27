@@ -9,7 +9,7 @@ namespace MVCGeradorDeRotas.Controllers
 {
     public class UsuariosController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             string user = "Anonymous";
             bool authenticate = false;
@@ -35,10 +35,8 @@ namespace MVCGeradorDeRotas.Controllers
             ViewBag.User = user;
             ViewBag.Authenticate = authenticate;
 
-            return View();
-
-            //var buscarUsuario = await UsuarioServices.Get();
-            //return View(buscarUsuario);
+            var buscarUsuario = await UsuarioServices.Get();
+            return View(buscarUsuario);
         }
 
         [HttpPost]
@@ -100,33 +98,33 @@ namespace MVCGeradorDeRotas.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(string id)
         {
-            //if (id == null)
-            //    return NotFound();
+            if (id == null)
+                return NotFound();
 
-            //var usuario = await UsuarioServices.GetId(id);
-            //if (usuario == null)
-            //    return NotFound("Usuário não encontrado");
+            var usuario = await UsuarioServices.GetId(id);
+            if (usuario == null)
+                return NotFound("Usuário não encontrado");
+
+            return View(usuario);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, Usuario editarUsuario)
+        {
+            var usuario = await UsuarioServices.GetId(id);
+
+            if (usuario == null)
+                return NotFound("Pessoa não encontrada");
+
+            var usuarioEditado = await UsuarioServices.PutUsuario(id, editarUsuario);
+            if (usuarioEditado == null)
+                return NotFound("API está fora do ar, tente novamente");
 
             return RedirectToAction(nameof(Index));
         }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Edit()
-        //{
-        //var usuario = await UsuarioServices.GetId(id);
-
-        //if (usuario == null)
-        //    return NotFound("Pessoa não encontrada");
-
-        //var usuarioEditado = await UsuarioServices.PutUsuario(id, editarUsuario);
-        //if (usuarioEditado == null)
-        //    return NotFound("API está fora do ar, tente novamente");
-
-        //    return RedirectToAction(nameof(Index));
-        //}
 
         public IActionResult Delete()
         {

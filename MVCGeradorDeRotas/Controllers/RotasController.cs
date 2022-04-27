@@ -151,8 +151,6 @@ namespace MVCGeradorDeRotas.Controllers
             var colunas = LeituraDeArquivos.LerArquivoNoDiretorio("cabecalho", _appEnvironment.WebRootPath);
             var selecionarCabecalhos = LeituraDeArquivos.LerArquivoExcel(colunas, _appEnvironment.WebRootPath);
 
-            //            var cidades = await CidadeServices.Get();
-
             List<string> listarCidades = new List<string>();
             List<IDictionary<string, string>> dicionarioServico = new List<IDictionary<string, string>>();
 
@@ -314,10 +312,10 @@ namespace MVCGeradorDeRotas.Controllers
                 }
             });
 
-            if ((dicionarioServicosECidades.Count / selecionarEquipes.Count) > 5)
-            {
-                return BadRequest("A quantidade máxima de serviços por equipe é 5");
-            }
+            //if ((dicionarioServicosECidades.Count / selecionarEquipes.Count) > 5)
+            //{
+            //    return BadRequest("A quantidade máxima de serviços por equipe é 5");
+            //}
 
 
             /* Begin Header DOC */
@@ -387,7 +385,7 @@ namespace MVCGeradorDeRotas.Controllers
 
                     tr3 = paragraph3.AppendText($"Tipo OS: {(dictionary.ContainsKey("TIPO OS") ? dictionary["TIPO OS"] : "_______________")}");
                     tr3.CharacterFormat.TextColor = Color.White;
-                    tr3.CharacterFormat.TextBackgroundColor = Color.Red;
+                    //tr3.CharacterFormat.TextBackgroundColor = Color.Red;
                     tr3.CharacterFormat.FontName = "Arial";
                     paragraph3.Format.LineSpacing = 15;
 
@@ -440,7 +438,7 @@ namespace MVCGeradorDeRotas.Controllers
 
                     tr3 = paragraph3.AppendText($"Tipo OS: {(dictionary.ContainsKey("TIPO OS") ? dictionary["TIPO OS"] : "_______________")}");
                     tr3.CharacterFormat.TextColor = Color.White;
-                    tr3.CharacterFormat.TextBackgroundColor = Color.Red;
+                    //tr3.CharacterFormat.TextBackgroundColor = Color.Red;
                     tr3.CharacterFormat.FontName = "Arial";
                     paragraph3.Format.LineSpacing = 15;
 
@@ -467,21 +465,21 @@ namespace MVCGeradorDeRotas.Controllers
                 decimal restSplit = dicionarioServicosECidades.Count % listarEquipesSelecionadas.Count;
                 int listEquip = 0;
 
-                if (restSplit > 5)
-                {
-                    serviceSplit = 5;
-                    restSplit = Math.Ceiling((decimal)dicionarioServicosECidades.Count % 5);
-                }
+				if (restSplit > 5)
+				{
+					serviceSplit = 5;
+					restSplit = Math.Ceiling((decimal)dicionarioServicosECidades.Count % 5);
+				}
 
-                for (int k = 0; k < dicionarioServicosECidades.Count; k++)
+				for (int k = 0; k < dicionarioServicosECidades.Count; k++)
                 {
-                    Paragraph paragraphEquip = section.AddParagraph();
-                    TextRange trEquip = paragraphEquip.AppendText($"Nome da Equipe: {listarEquipesSelecionadas[listEquip]}");
-                    trEquip.CharacterFormat.FontSize = 14;
-                    trEquip.CharacterFormat.Bold = true;
-                    trEquip.CharacterFormat.FontName = "Arial";
+                    //Paragraph paragraphEquip = section.AddParagraph();
+					//TextRange trEquip = paragraphEquip.AppendText($"Nome da Equipe: {listarEquipesSelecionadas[listEquip]}");
+					//trEquip.CharacterFormat.FontSize = 14;
+					//trEquip.CharacterFormat.Bold = true;
+					//trEquip.CharacterFormat.FontName = "Arial";
 
-                    emptyParagraph = section.AddParagraph();
+					emptyParagraph = section.AddParagraph();
                     emptyParagraph.AppendText(" ");
 
                     listEquip++;
@@ -509,7 +507,7 @@ namespace MVCGeradorDeRotas.Controllers
 
                         tr3 = paragraph3.AppendText($"Tipo OS: {(dictionary.ContainsKey("TIPO OS") ? dictionary["TIPO OS"] : "_______________")}");
                         tr3.CharacterFormat.TextColor = Color.White;
-                        tr3.CharacterFormat.TextBackgroundColor = Color.Red;
+                        //tr3.CharacterFormat.TextBackgroundColor = Color.Red;
                         tr3.CharacterFormat.FontName = "Arial";
                         paragraph3.Format.LineSpacing = 15;
 
@@ -569,7 +567,7 @@ namespace MVCGeradorDeRotas.Controllers
 
                             tr3 = paragraph3.AppendText($"Tipo OS: {(dictionary.ContainsKey("TIPO OS") ? dictionary["TIPO OS"] : "_______________")}");
                             tr3.CharacterFormat.TextColor = Color.White;
-                            tr3.CharacterFormat.TextBackgroundColor = Color.Red;
+                            //tr3.CharacterFormat.TextBackgroundColor = Color.Red;
                             tr3.CharacterFormat.FontName = "Arial";
                             paragraph3.Format.LineSpacing = 15;
 
@@ -596,7 +594,7 @@ namespace MVCGeradorDeRotas.Controllers
             servico = servico.Replace("Ç", "C").Replace("ç", "c").Replace("Ã", "A").Replace("ã", "a").Replace("É", "e").Replace("é", "e").Replace(" ", "");
             cidade = cidade.Replace("Ç", "C").Replace("ç", "c").Replace("Ã", "A").Replace("ã", "a").Replace("É", "e").Replace("é", "e").Replace(" ", "");
 
-            string nameFile = $"Route{servico}{cidade}{DateTime.Now.Date.ToString("ddMMyyyy")}.docx";
+            string nameFile = $"Rota - {servico} - {cidade} - {DateTime.Now.Date.ToString("ddMMyyyy")}.docx";
 
             document.SaveToFile(_appEnvironment.WebRootPath + @"\Arquivo\" + nameFile, FileFormat.Docx);
 

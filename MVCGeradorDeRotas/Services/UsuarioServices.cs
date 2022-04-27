@@ -137,6 +137,7 @@ namespace MVCGeradorDeRotas
             }
         }
 
+
         public static async Task<Usuario> DeleteUsuario(string id, Usuario usuario)
         {
             try
