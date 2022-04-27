@@ -465,21 +465,16 @@ namespace MVCGeradorDeRotas.Controllers
                 decimal restSplit = dicionarioServicosECidades.Count % listarEquipesSelecionadas.Count;
                 int listEquip = 0;
 
-				if (restSplit > 5)
-				{
-					serviceSplit = 5;
-					restSplit = Math.Ceiling((decimal)dicionarioServicosECidades.Count % 5);
-				}
-
-				for (int k = 0; k < dicionarioServicosECidades.Count; k++)
+                if (restSplit > 5)
                 {
-                    //Paragraph paragraphEquip = section.AddParagraph();
-					//TextRange trEquip = paragraphEquip.AppendText($"Nome da Equipe: {listarEquipesSelecionadas[listEquip]}");
-					//trEquip.CharacterFormat.FontSize = 14;
-					//trEquip.CharacterFormat.Bold = true;
-					//trEquip.CharacterFormat.FontName = "Arial";
+                    serviceSplit = 5;
+                    restSplit = Math.Ceiling((decimal)dicionarioServicosECidades.Count % 5);
+                }
 
-					emptyParagraph = section.AddParagraph();
+                for (int k = 0; k < dicionarioServicosECidades.Count; k++)
+                {
+
+                    emptyParagraph = section.AddParagraph();
                     emptyParagraph.AppendText(" ");
 
                     listEquip++;
@@ -600,28 +595,9 @@ namespace MVCGeradorDeRotas.Controllers
 
             /* FIM DOC*/
 
-
-            Rotas rotas = new Rotas();
-            rotas.Data = DateTime.Now.Date.ToString("dd/MM/yyyy");
-            rotas.Servico = servico;
-            rotas.Cidade = cidade;
-            rotas.Cabecalho = colunas;
-            rotas.Equipes = selecionarEquipes;
-            rotas.NomeDoArquivo = nameFile;
-            rotas.CaminhoCompleto = _appEnvironment.WebRootPath + @"\Arquivo\" + nameFile;
-
-
-
-            //RotaServices novaRota = new RotaServices();
-
-            //novaRota.Create(rotas);
-
-            //_rotaServices.Create(historyGenerateFile);
-
             RemoverArquivo.RemoverArquivoDoDiretorio("cabecalho", ".txt", _appEnvironment.WebRootPath);
             RemoverArquivo.RemoverArquivoDoDiretorio("servico", ".txt", _appEnvironment.WebRootPath);
             RemoverArquivo.RemoverArquivoDoDiretorio("cidade", ".txt", _appEnvironment.WebRootPath);
-
 
             return View();
         }
